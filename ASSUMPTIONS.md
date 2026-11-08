@@ -12,3 +12,9 @@
 - For submission, all documentation (diagrams, etc.) is encompassed by report
 - One interaction diagram per group member (five in our case)
 - UMLs do not require graphical methods (JFrame, JPanel, Swing, etc.)
+
+
+
+Pending Questions
+- Should Flight Agents and System Administrators have a Register option at login?
+- Are Flight Agents and System Administrators pre-loaded?
