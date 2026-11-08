@@ -18,3 +18,6 @@
 Pending Questions
 - Should Flight Agents and System Administrators have a Register option at login?
 - Are Flight Agents and System Administrators pre-loaded?
+- After registering, back to login or login automatically?
+- Promotion News popup on the 1st only, or first login after the 1st?
+- Can a customer edit their own profile?
