@@ -21,3 +21,5 @@ Pending Questions
 - After registering, back to login or login automatically?
 - Promotion News popup on the 1st only, or first login after the 1st?
 - Can a customer edit their own profile?
+- What goes in the results list for Search Flights (flight number, times, prices, etc.)?
+- What goes in Flight details only (e.g., available seats, aircraft, etc.)
