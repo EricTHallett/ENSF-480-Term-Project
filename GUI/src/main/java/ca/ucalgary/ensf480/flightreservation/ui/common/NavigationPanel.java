@@ -1,15 +1,14 @@
 package ca.ucalgary.ensf480.flightreservation.ui.common;
 
 import ca.ucalgary.ensf480.flightreservation.session.Role;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public final class NavigationPanel extends JPanel {
@@ -22,6 +21,7 @@ public final class NavigationPanel extends JPanel {
             Role role,
             Consumer<ModuleType> moduleSelectionCallback,
             Runnable profileCallback,
+            Runnable promotionCallback,
             Runnable logoutCallback) {
         super(new BorderLayout());
         setBackground(UiStyle.NAVIGATION_BACKGROUND);
@@ -44,12 +44,16 @@ public final class NavigationPanel extends JPanel {
         JPanel sessionPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         sessionPanel.setOpaque(false);
         JButton profileButton = new JButton("My Profile");
+        JButton promotionButton = new JButton("Promotions");
         JButton logoutButton = new JButton("Logout");
         UiStyle.secondaryButton(profileButton);
+        UiStyle.secondaryButton(promotionButton);
         UiStyle.dangerButton(logoutButton);
         profileButton.addActionListener(event -> profileCallback.run());
+        promotionButton.addActionListener(event -> promotionCallback.run());
         logoutButton.addActionListener(event -> logoutCallback.run());
         sessionPanel.add(profileButton);
+        sessionPanel.add(promotionButton);
         sessionPanel.add(logoutButton);
 
         add(modulePanel, BorderLayout.WEST);

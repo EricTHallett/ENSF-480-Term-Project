@@ -6,10 +6,11 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public enum Role {
+    //Add Bottom Bar items per role here
     CUSTOMER("Customer", EnumSet.of(ModuleType.FLIGHTS, ModuleType.RESERVATIONS)),
     FLIGHT_AGENT("Flight Agent", EnumSet.of(ModuleType.FLIGHTS, ModuleType.RESERVATIONS, ModuleType.CUSTOMERS)),
-    ADMINISTRATOR("Administrator", EnumSet.of(ModuleType.FLIGHTS, ModuleType.ROUTES, ModuleType.AIRCRAFT)),
-    SUPER_USER("Super User",EnumSet.of(ModuleType.FLIGHTS, ModuleType.ROUTES, ModuleType.AIRCRAFT, ModuleType.RESERVATIONS, ModuleType.CUSTOMERS));
+    ADMINISTRATOR("Administrator", EnumSet.of(ModuleType.FLIGHTS, ModuleType.AIRCRAFT)),
+    SUPER_USER("Super User",EnumSet.of(ModuleType.FLIGHTS, ModuleType.AIRCRAFT, ModuleType.RESERVATIONS, ModuleType.CUSTOMERS));
     private final String displayName;
     private final Set<ModuleType> allowedModules;
 

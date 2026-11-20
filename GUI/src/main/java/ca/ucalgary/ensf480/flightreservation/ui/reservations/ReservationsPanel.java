@@ -10,17 +10,26 @@ public final class ReservationsPanel extends ModulePanel {
 
     public ReservationsPanel(JFrame owner, Role role) {
         super(owner, "Reservations",
-                new String[]{"Confirmation", "Status", "Departure date"},
-                actionsFor(role));
-                populateTable(columnsFor(role), new Object[][]{{},{}});
+            navigationFor(role),
+            actionsFor(role));
+            populateTable(columnsFor(role), new Object[][]{{},{}});
     }
 
     private static String[] actionsFor(Role role) {
         if (role == Role.CUSTOMER) {
-            return new String[]{"View Reservation", "Change Flight or Seat", "Cancel Reservation"};
+            return new String[]{"View Reservation", "Cancel Reservation"};
         }
         return new String[]{
-                "Create Reservation", "View Reservation", "Change Flight or Seat", "Cancel Reservation"};
+                 "View Reservation", "Cancel Reservation"};
+    }
+    private static String[] navigationFor(Role role){
+        if (role == role.CUSTOMER){
+            return  new String[]{"Confirmation", "Status", "Departure date"};
+        }
+        else{
+            return new String[]{"Confirmation", "Status", "Departure date", "Customer ID"};
+        }
+
     }
     private static String[] columnsFor(Role role){
         switch(role){

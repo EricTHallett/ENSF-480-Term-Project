@@ -44,6 +44,7 @@ public final class RoleSelectionPanel extends JPanel {
             roleButton.setAlignmentX(CENTER_ALIGNMENT);
             roleButton.setMaximumSize(new Dimension(280, 48));
             UiStyle.primaryButton(roleButton);
+            //This is the Callback where login dialog needs to be inserted
             roleButton.addActionListener(event -> roleSelectionCallback.accept(role));
             rolePanel.add(roleButton);
             rolePanel.add(Box.createVerticalStrut(14));

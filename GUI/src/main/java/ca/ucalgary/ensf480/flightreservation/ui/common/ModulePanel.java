@@ -161,7 +161,14 @@ public abstract class ModulePanel extends JPanel {
     }
 
     private void onAction(String actionName) {
-        // TODO: Replace with a module-specific controller callback.
-        DefaultDialog.show(owner, actionName);
+        //Replace With DB handler For each item 12503/2
+        System.out.println(actionName);
+        if (actionName == "View Flight Details" & 1 == 0){
+            DefaultDialog.show(owner, actionName);
+        }
+        else{
+            DefaultDialog.show(owner,"19044");//This is the place holder delet 
+            //once all Actions are implementd this should be the fall through for ED/EC
+        }
     }
 }

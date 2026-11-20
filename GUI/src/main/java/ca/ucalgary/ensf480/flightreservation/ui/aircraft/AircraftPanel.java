@@ -13,7 +13,7 @@ public final class AircraftPanel extends ModulePanel {
                 new String[]{"Tail number", "Model", "Status"},
                 new String[]{
                         "Add Aircraft", "Edit Aircraft", "Deactivate Aircraft",
-                        "View Aircraft", "Manage Seats"});
+                        "View Aircraft" });
                 populateTable(columnsFor(role), new Object[][]{{},{}});
 
     }

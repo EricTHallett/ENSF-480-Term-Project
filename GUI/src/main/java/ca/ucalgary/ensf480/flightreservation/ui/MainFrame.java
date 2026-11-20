@@ -80,6 +80,7 @@ public final class MainFrame extends JFrame {
                 activeSession.getActiveRole(),
                 this::showModule,
                 this::showProfile,
+                this::showProfile,
                 this::logout);
 
         JPanel dashboardContent = new JPanel(new BorderLayout(12, 12));
@@ -124,7 +125,12 @@ public final class MainFrame extends JFrame {
     }
 
     private void showProfile() {
+        //This needs the profile info handler 12503/1
         DefaultDialog.show(this, "My Profile");
+    }
+    private void showPromotion() {
+        //This needs the profile info handler 12503/1
+        DefaultDialog.show(this, "Promotion");
     }
 
     private void logout() {

@@ -18,18 +18,20 @@ public final class FlightsPanel extends ModulePanel {
     private static String[] actionsFor(Role role) {
         switch (role) {
             case CUSTOMER:
-                return new String[]{"Book Flight", "View Flight Details"};
+                return new String[]{"Book Flight"};
             case FLIGHT_AGENT:
-                return new String[]{"View Flight Details"};
+                return new String[]{"Book Flight"};
             case ADMINISTRATOR:
-                return new String[]{"Add Flight", "Edit Flight", "Cancel Flight", "View Flight Details"};
+                return new String[]{"Add Flight", "Edit Flight", "Cancel Flight", "This Is Test"};
             case SUPER_USER:
-                return new String[]{"Add Flight", "Edit Flight", "Cancel Flight", "View Flight Details"};
+                return new String[]{"Add Flight", "Edit Flight", "Cancel Flight"};
             default:
                 throw new IllegalArgumentException("Unsupported role: " + role);
         }
     }
     private static String[] columnsFor(Role role){
+        //This can Either be hard coded or pulled from DB, if pulled from DB needs to implements
+        //Dynamic dialog scaling. imo hard code it dynamic dialogs is a bitch
         switch(role){
             case CUSTOMER:
                 return new String[]{"PLACE HOLDER 056", "PLACE HOLDER 057"};
