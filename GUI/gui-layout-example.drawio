@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-10-31T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="gui-wireframe" name="Shared GUI Layout">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Flight Reservation System — Shared GUI Wireframe" style="text;html=1;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="frame" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="75" width="1190" height="745" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="appHeader" value="✈  Flight Reservation System" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=middle;spacingLeft=15;fillColor=#1f4e78;strokeColor=#1f4e78;fontColor=#ffffff;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="95" width="820" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="userHeader" value="Customer: Jane Doe  ⚙" style="rounded=0;whiteSpace=wrap;html=1;align=right;verticalAlign=middle;spacingRight=15;fillColor=#1f4e78;strokeColor=#1f4e78;fontColor=#ffffff;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="880" y="95" width="330" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="searchArea" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="1150" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="searchLabel" value="SEARCH FLIGHTS" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#1f4e78;" vertex="1" parent="1">
+          <mxGeometry x="75" y="167" width="160" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="origin" value="Origin Airport  ▼" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="75" y="200" width="160" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="destination" value="Destination Airport  ▼" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="200" width="180" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="airline" value="Airline  ▼" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="445" y="200" width="140" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="date" value="Departure Date  📅" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="600" y="200" width="165" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="time" value="Time of Day  ▼" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="200" width="140" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="searchButton" value="Search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f4e78;strokeColor=#1f4e78;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="200" width="110" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="clearButton" value="Clear" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontColor=#1f4e78;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="200" width="110" height="34" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="actionPanel" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="265" width="210" height="430" as="geometry"/>
+        </mxCell>
+        <mxCell id="actionLabel" value="ACTIONS" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#5b3c6f;" vertex="1" parent="1">
+          <mxGeometry x="75" y="280" width="180" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="book" value="Book Selected Flight" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9673a6;strokeColor=#9673a6;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="330" width="170" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="details" value="View Flight Details" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontColor=#5b3c6f;" vertex="1" parent="1">
+          <mxGeometry x="80" y="385" width="170" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="refresh" value="Refresh Results" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontColor=#5b3c6f;" vertex="1" parent="1">
+          <mxGeometry x="80" y="440" width="170" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="actionHelp" value="Actions change with&lt;br&gt;the active role and module.&lt;br&gt;&lt;br&gt;Buttons requiring a row&lt;br&gt;remain disabled until a&lt;br&gt;table selection is made." style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="80" y="525" width="170" height="115" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="tableArea" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="285" y="265" width="925" height="430" as="geometry"/>
+        </mxCell>
+        <mxCell id="resultsLabel" value="AVAILABLE FLIGHTS                                               3 results" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=5;fontSize=14;fontStyle=1;fontColor=#2d6a3f;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="890" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="tableHeader" value="Flight       Airline        Route             Departure           Arrival        Aircraft       Seats       Fare" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="320" width="890" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="row1" value="AC101       Air Canada    YYC → YVR      Nov 14  08:00      08:42          A220              18          $189" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#eaf4e8;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="358" width="890" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="row2" value="WS203       WestJet         YYC → YVR      Nov 14  10:30      11:15          737-8             7            $165" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#ffffff;strokeColor=#cccccc;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="400" width="890" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="row3" value="AC223       Air Canada    YYC → YVR      Nov 14  15:10      15:55          A320              24          $210" style="rounded=0;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fillColor=#ffffff;strokeColor=#cccccc;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="442" width="890" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="tableHint" value="Select one row to enable applicable actions" style="text;html=1;align=center;verticalAlign=middle;fontStyle=2;fontColor=#777777;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="605" width="400" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="navArea" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="60" y="710" width="1150" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="flightsNav" value="Flights" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f4e78;strokeColor=#1f4e78;fontColor=#ffffff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="730" width="135" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="reservationsNav" value="Reservations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontColor=#1f4e78;" vertex="1" parent="1">
+          <mxGeometry x="240" y="730" width="135" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="conditionalNav" value="Customers / Routes / Aircraft&lt;br&gt;(shown only when role permits)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;fontColor=#666666;dashed=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="725" width="245" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="profileNav" value="My Profile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontColor=#1f4e78;" vertex="1" parent="1">
+          <mxGeometry x="880" y="730" width="135" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="logoutNav" value="Logout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#8a1c1c;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="730" width="135" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="roleVariants" value="&lt;b&gt;Same shell, different role actions&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Customer / Flights&lt;/b&gt;&lt;br&gt;• Book Flight&lt;br&gt;• View Details&lt;br&gt;&lt;br&gt;&lt;b&gt;Agent / Reservations&lt;/b&gt;&lt;br&gt;• Create Reservation&lt;br&gt;• Modify Reservation&lt;br&gt;• Cancel Reservation&lt;br&gt;&lt;br&gt;&lt;b&gt;Admin / Aircraft&lt;/b&gt;&lt;br&gt;• Add Aircraft&lt;br&gt;• Edit Aircraft&lt;br&gt;• Deactivate Aircraft&lt;br&gt;• Manage Seats → popup" style="shape=note;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="115" width="285" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="seatPopup" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;Manage Seats — Aircraft C-FABC&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;[ Add Seat ]  [ Edit ]  [ Deactivate ]&lt;br&gt;&lt;br&gt;☐ Show inactive seats&lt;br&gt;&lt;br&gt;&lt;b&gt;Seat     Class          Active&lt;/b&gt;&lt;br&gt;1A        Business      Yes&lt;br&gt;1B        Business      Yes&lt;br&gt;12A      Economy       No&lt;br&gt;&lt;br&gt;                         [ Close ]" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=14;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="490" width="285" height="300" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
