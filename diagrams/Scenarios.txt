@@ -1,0 +1,28 @@
+1. Register Profile:
+
+Customer (John) selects the option to Register a new profile, which prompts customer to include their required personal information. John enters their email, full name, phone number and address. If entries are validated, John is added to the database as a customer.
+
+2. Login + View Promotion Login: 
+
+Customer (John) enters their associated email, john.doe@email.com, to proceed into the system. When entered, the emailed is validated and logs John in to the Home page. The home page displays the most up to date promotion newsletter.
+
+3. View/Edit Profile:
+
+Customer (John) with already created account logs in. From the prompted options, customer selects View profile, which displays their personal information, pulled from the current database. His current is phone number 403 111 1111 and in the presented page John chooses to edit the phone number to 403 222 2222. He selects the option to confirm changes, and the database is updated with his new phone number.
+
+4. Search Flights + View Flight Details
+
+Customer (John) is logged in, and chooses to search a Flight. He has the option to fill blank spaces for Airline, Flight Number, Destination Location, Departure Location. He fills out airline with Air Canada and Flight Number with 1111, leaving the remaining blank. When he proceeds, the screen displays the results of this filter, with multiple objects that have varying Departure and Arrival date and times. John selects View Details on the option departing at 9:00 AM on 2026-12-01. The page then displays the completed information to match the search field, as well as the amount of free seats and the price per ticket.
+
+5. Book Flight + Make Transaction + Receive Booking Confirmation
+
+Customer (John) is logged in, and selects the option to book a flight. The same search page as in Search Flight is displayed, and John fills in the Airline with West Jet, Destination with Toronto and Departure with Calgary. From the options displayed (additionally displays available seats), John selects Flight 2222, Departing at 1:00 PM on 2026-12-31, which costs $400.00 per ticket, and fills the field for number of seats with 3. He is then taken to the payment page. There, John completes the form with his credit card number, security code, expiry, billing address and name on card. If the fields are validated, the screen displays a confirmation page, with the reservation number, and the details from the specific booking such as all flight details, amount of seats purchased, credit card number used, account owner's full name and date and time of purchase. The reservation is then added to the database and the flight available seats is updated accordingly.
+
+6. View Reservation + Modify Reservation + Make Transaction
+
+Customer (John) is logged in and has purchased a flight from Air Canada with number 3333 departing on 2027-01-01. He selects View Reservations, which displays all the Reservations he owns that have not yet Arrived. The screen displays Airline, Flight Number and Departure Time for each, as well as the Reservation Number. He matches the reservation number he has to the desired reservation and selects it, which displays the reservation details with total price and ticket count. He decides to change the reservation to 2 tickets, which sends him to the Make Transaction page. This time, the total displayed is a negative number, since it is a refund. He then fills in the payment information as in the Make Transaction stage, and submits, receiving a new booking confirmation, displaying the new total. The previous reservation is deleted in the database and a new one is created. The flight available seats count is accordingly updated.
+
+7. View Reservations + Cancel Reservation
+
+Customer (John) is logged in, and had previously purchased and modified a reservation. He again, goes into View Reservations and enters his reservation number to the desired reservation, which contains 3 tickets at $400 each totaling $1200. He decides to cancel the reservation, and is then taken again to the Make Transaction page, where he must fill in the appropriate information. The page also displays the amount to be refunded at $1200. He proceeds and is presented a confirmation that his flight has been deleted. The reservation is deleted from the database and the available seats in the flight is updated accordingly.
+ 
