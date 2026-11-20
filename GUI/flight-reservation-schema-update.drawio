@@ -1,0 +1,122 @@
+<mxfile host="app.diagrams.net" agent="Codex">
+  <diagram id="core-flight-erd" name="Core Physical ERD">
+    <mxGraphModel dx="1414" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="peopleHeader" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#1f4e78;" value="IDENTITY AND ROLES" vertex="1">
+          <mxGeometry height="30" width="650" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="operationsHeader" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#6b4f00;" value="FLIGHT OPERATIONS" vertex="1">
+          <mxGeometry height="30" width="650" x="730" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bookingHeader" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#2d6a3f;" value="BOOKING AND MANIFEST" vertex="1">
+          <mxGeometry height="30" width="650" x="1790" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="person" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;PERSON&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; person_id : INTEGER&lt;br&gt;first_name : TEXT NN&lt;br&gt;last_name : TEXT NN&lt;br&gt;email : TEXT NN UQ&lt;br&gt;phone : TEXT&lt;br&gt;is_active : INTEGER NN DEFAULT 1&lt;br&gt;created_at : TEXT NN&lt;br&gt;updated_at : TEXT NN" vertex="1">
+          <mxGeometry height="330" width="285" x="40" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="roleNote" parent="1" style="shape=note;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" value="Roles overlap:&lt;br&gt;a person may have any combination of role rows.&lt;br&gt;Only one role is active per login session." vertex="1">
+          <mxGeometry height="100" width="150" x="350" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="customer" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;CUSTOMER&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK, FK&lt;/b&gt; person_id : INTEGER&lt;br&gt;address : TEXT&lt;br&gt;promotion_opt_in : INTEGER NN DEFAULT 1&lt;br&gt;username : TEXT NN UQ&lt;br&gt;password : TEXT NN" vertex="1">
+          <mxGeometry height="170" width="280" x="530" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;FLIGHT_AGENT&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK, FK&lt;/b&gt; person_id : INTEGER&lt;br&gt;employee_number : TEXT NN UQ&lt;br&gt;username : TEXT NN UQ&lt;br&gt;password : TEXT NN" vertex="1">
+          <mxGeometry height="145" width="280" x="530" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;ADMINISTRATOR&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK, FK&lt;/b&gt; person_id : INTEGER&lt;br&gt;employee_number : TEXT NN UQ&lt;br&gt;username : TEXT NN UQ&lt;br&gt;password : TEXT NN" vertex="1">
+          <mxGeometry height="145" width="280" x="530" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="airline" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;AIRLINE&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; airline_id : INTEGER&lt;br&gt;airline_code : TEXT NN UQ&lt;br&gt;name : TEXT NN&lt;br&gt;is_active : INTEGER NN DEFAULT 1" vertex="1">
+          <mxGeometry height="155" width="270" x="865" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="route" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;ROUTE&lt;/b&gt;&lt;/div&gt;&lt;hr/&gt;&lt;b&gt;PK&lt;/b&gt; route_id : INTEGER&lt;br/&gt;origin_airport_code : TEXT NN&lt;br/&gt;destination_airport_code : TEXT NN&lt;br/&gt;is_active : INTEGER NN DEFAULT 1&lt;br/&gt;&lt;b&gt;UQ&lt;/b&gt; (origin_airport_code, destination_airport_code)" vertex="1">
+          <mxGeometry height="180" width="300" x="850" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="aircraft" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;AIRCRAFT&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; aircraft_id : INTEGER&lt;br&gt;tail_number : TEXT NN UQ&lt;br&gt;model : TEXT NN&lt;br&gt;is_active : INTEGER NN DEFAULT 1" vertex="1">
+          <mxGeometry height="155" width="270" x="850" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="seat" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;AIRCRAFT_SEAT&lt;/b&gt;&lt;/div&gt;&lt;hr/&gt;&lt;b&gt;PK&lt;/b&gt; seat_id : INTEGER&lt;br/&gt;&lt;b&gt;FK&lt;/b&gt; aircraft_id : INTEGER NN&lt;br/&gt;seat_label : TEXT NN&lt;br/&gt;cabin_class : TEXT NN&lt;br/&gt;is_active : INTEGER NN DEFAULT 1&lt;br/&gt;&lt;b&gt;UQ&lt;/b&gt; (aircraft_id, seat_label)" vertex="1">
+          <mxGeometry height="190" width="290" x="840" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="flight" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;FLIGHT&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; flight_id : INTEGER&lt;br&gt;flight_number : TEXT NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; airline_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; route_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; aircraft_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; cancelled_by_person_id : INTEGER NULL&lt;br&gt;departure_at : TEXT NN&lt;br&gt;arrival_at : TEXT NN&lt;br&gt;base_fare_cents : INTEGER NN&lt;br&gt;status : TEXT NN&lt;br&gt;cancelled_at : TEXT NULL&lt;br&gt;cancellation_reason : TEXT NULL&lt;br&gt;created_at : TEXT NN&lt;br&gt;updated_at : TEXT NN&lt;br&gt;&lt;b&gt;UQ&lt;/b&gt; (airline_id, flight_number, departure_at)" vertex="1">
+          <mxGeometry height="380" width="315" x="1235" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="reservation" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;RESERVATION&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;&lt;b&gt;PK&lt;/b&gt; reservation_id : INTEGER&lt;br&gt;confirmation_code : TEXT NN UQ&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; customer_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; flight_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; seat_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; booked_by_person_id : INTEGER NN&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; cancelled_by_person_id : INTEGER NULL&lt;br&gt;fare_cents : INTEGER NN&lt;br&gt;status : TEXT NN&lt;br&gt;cancellation_reason : TEXT NULL&lt;br&gt;booked_at : TEXT NN&lt;br&gt;updated_at : TEXT NN&lt;br&gt;cancelled_at : TEXT NULL" vertex="1">
+          <mxGeometry height="360" width="325" x="1720" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="manifest" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;fontSize=12;shadow=1;" value="&lt;div style=&quot;font-size:15px;text-align:center;&quot;&gt;&lt;b&gt;FLIGHT_MANIFEST «VIEW»&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;flight_id : INTEGER&lt;br&gt;flight_number : TEXT&lt;br&gt;departure_at : TEXT&lt;br&gt;confirmation_code : TEXT&lt;br&gt;customer_person_id : INTEGER&lt;br&gt;customer_name : TEXT&lt;br&gt;seat_label : TEXT&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="315" x="1720" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="personCustomer" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToOne;strokeColor=#9673a6;fontSize=10;" target="customer" value="may be">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="225" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="personAgent" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToOne;strokeColor=#9673a6;fontSize=10;" target="agent" value="may be">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="425" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="personAdmin" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToOne;strokeColor=#9673a6;fontSize=10;" target="admin" value="may be">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="600" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="airlineFlight" edge="1" parent="1" source="airline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#d6b656;fontSize=10;" target="flight" value="operates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="routeFlight" edge="1" parent="1" source="route" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#d6b656;fontSize=10;" target="flight" value="schedules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aircraftFlight" edge="1" parent="1" source="aircraft" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#d6b656;fontSize=10;" target="flight" value="assigned to">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aircraftSeat" edge="1" parent="1" source="aircraft" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERoneToMany;strokeColor=#d6b656;fontSize=10;" target="seat" value="contains">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="customerReservation" edge="1" parent="1" source="customer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#82b366;fontSize=10;" target="reservation" value="owns">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="825" y="242.5" />
+              <mxPoint x="825" y="130" />
+              <mxPoint x="1877.5" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="personReservation" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#6c8ebf;fontSize=10;" target="reservation" value="booking actor">
+          <mxGeometry relative="1" x="-0.0878" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="1050" />
+              <mxPoint x="2110" y="1050" />
+              <mxPoint x="2110" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="personReservationCancellation" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERzeroToOne;endArrow=ERzeroToMany;strokeColor=#6c8ebf;fontSize=10;dashed=1;" target="reservation" value="cancellation actor">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="5" y="1090" /><mxPoint x="2080" y="1090" /><mxPoint x="2080" y="500" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="personFlightCancellation" edge="1" parent="1" source="person" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERzeroToOne;endArrow=ERzeroToMany;strokeColor=#6c8ebf;fontSize=10;dashed=1;" target="flight" value="flight cancellation actor">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="10" y="690" /><mxPoint x="1180" y="690" /><mxPoint x="1180" y="520" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="flightReservation" edge="1" parent="1" source="flight" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#82b366;fontSize=10;" target="reservation" value="booked on">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1690" y="440" />
+              <mxPoint x="1690" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="seatReservation" edge="1" parent="1" source="seat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERone;endArrow=ERzeroToMany;strokeColor=#82b366;fontSize=10;" target="reservation" value="assigned seat">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1620" y="860" />
+              <mxPoint x="1620" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="reservationManifest" edge="1" parent="1" source="reservation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;startArrow=none;endArrow=open;strokeColor=#666666;fontSize=10;" target="manifest" value="derives">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="constraints" parent="1" style="shape=note;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=12;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" value="&lt;div style=&quot;font-size:15px;&quot;&gt;&lt;b&gt;Lifecycle and integrity rules&lt;/b&gt;&lt;/div&gt;&lt;hr&gt;• Role credentials are plain text for this course demo only.&lt;br&gt;• Selecting a login role determines which subtype credentials are checked.&lt;br&gt;• Boolean values CHECK: 0 or 1; route origin and destination must differ.&lt;br&gt;• Flight arrival must be after departure; fares must be non-negative.&lt;br&gt;• Flight status: SCHEDULED, CANCELLED, or COMPLETED.&lt;br&gt;• Reservation status: CONFIRMED or CANCELLED.&lt;br&gt;• Partial UQ index: (flight_id, seat_id) WHERE reservation status = CONFIRMED.&lt;br&gt;• A reservation seat must belong to the aircraft assigned to its flight.&lt;br&gt;• Cancelling a flight and its confirmed reservations is one transaction.&lt;br&gt;• Foreign keys use ON DELETE RESTRICT; normal removal uses cancel/deactivate.&lt;br&gt;• Hard deletion is permitted only for unused records entered by mistake." vertex="1">
+          <mxGeometry height="315" width="700" x="40" y="735" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
