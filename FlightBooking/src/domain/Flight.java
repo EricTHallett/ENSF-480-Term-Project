@@ -19,7 +19,15 @@ public class Flight {
 
     public Flight(int flightId, String flightNumber, String airline, String origin, String destination,
                   LocalDateTime departureTime, LocalDateTime arrivalTime, double price, int totalSeats) {
-        if (arrivalTime.isBefore(departureTime)) throw new IllegalArgumentException("Flight arrival must be after departure time");
+        requireText(flightNumber, "Flight number");
+        requireText(airline, "Airline");
+        requireText(origin, "Origin");
+        requireText(destination, "Destination");
+        if (origin.equalsIgnoreCase(destination)) throw new IllegalArgumentException("Origin and destination cannot be the same");
+        if (departureTime == null || arrivalTime == null) throw new IllegalArgumentException("Departure or arrival time cannot be null");
+        if (arrivalTime.isBefore(departureTime)) throw new IllegalArgumentException("Arrival time cannot be before departure time");
+        if (price < 0) throw new IllegalArgumentException("Price cannot be negative");
+        if (totalSeats < 1) throw new IllegalArgumentException("Total seats must be at least 1");
 
         this.flightId = flightId;
         this.flightNumber = flightNumber;
@@ -46,7 +54,7 @@ public class Flight {
 
     public boolean isBookable() {
         return status == FlightStatus.SCHEDULED
-                && departureTime.isAfter(LocalDateTime.now())
+                && !hasDeparted()
                 && availableSeats > 0;
     }
 
@@ -78,24 +86,45 @@ public class Flight {
         status = FlightStatus.REMOVED; // soft delete for flights, preserves history
     }
 
+    public void markDeparted() {
+        if (status != FlightStatus.REMOVED && hasDeparted()) {
+            status = FlightStatus.DEPARTED;
+        }
+    }
+
+    // use with DAO when insertinng a new flight, stores the ID from database
+    public void assignId(int id) {
+        if (flightId != 0) throw new IllegalStateException("Flight already assigned an id");
+        if (id < 1)  throw new IllegalArgumentException("Flight id must be positive");
+        this.flightId = id;
+    }
+
     // admin modifies flight (reschedule or delay)
     public void updateSchedule(LocalDateTime newDeparture, LocalDateTime newArrival) {
-        if (newArrival.isBefore(newDeparture)) throw new IllegalArgumentException("Arrival time must be before departure time");
+        requireEditable();
+        if (newArrival.isBefore(newDeparture)) throw new IllegalArgumentException("Departure time must be before arrival time");
         this.departureTime = newDeparture;
         this.arrivalTime = newArrival;
     }
 
     // admin function to change fare (?)
     public void setPrice(double newPrice) {
-        if (newPrice < 0) throw new IllegalArgumentException("Price must be positive");
+        requireEditable();
+        if (newPrice < 0) throw new IllegalArgumentException("Price must not be negative");
         this.price = newPrice;
     }
 
+    public boolean hasDeparted() {
+        return !departureTime.isAfter(LocalDateTime.now());
+    }
 
+    public boolean hasArrived() {
+        return !arrivalTime.isAfter(LocalDateTime.now());
+    }
 
     @Override
     public String toString() {
-        return "#" + flightId + " " + airline + ": " + origin + " -> " + destination
+        return "#" + flightId + " " + flightNumber + " " + airline + ": " + origin + " -> " + destination
                 + " | " + departureTime
                 + " | $" + price
                 + " | " + availableSeats + " seats left"
@@ -144,5 +173,14 @@ public class Flight {
 
     public FlightStatus getStatus() {
         return status;
+    }
+
+    // checker if text is missing when building
+    private static void requireText(String value, String fieldName) {
+        if (value == null || value.isBlank()) throw new IllegalArgumentException(fieldName + " must not be blank");
+    }
+
+    private void requireEditable() {
+        if (status == FlightStatus.REMOVED || status == FlightStatus.DEPARTED) throw new IllegalStateException("Cannot modify REMOVED or DEPARTED flights");
     }
 }
