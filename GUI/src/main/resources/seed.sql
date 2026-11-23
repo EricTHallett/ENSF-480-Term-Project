@@ -5,21 +5,22 @@ CREATE TABLE User (
     role TEXT NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    is_active INTEGER NOT NULL DEFAULT 1
-);
-
-CREATE TABLE Customer (
-    user_email TEXT PRIMARY KEY REFERENCES User(email),
+    is_active INTEGER NOT NULL DEFAULT 1,
     promotion_sent_on TEXT
 );
 
-CREATE TABLE FlightAgent (
-    user_email TEXT PRIMARY KEY REFERENCES User(email)
-);
+--CREATE TABLE Customer (
+--    user_email TEXT PRIMARY KEY REFERENCES User(email),
+--    promotion_sent_on TEXT
+--);
 
-CREATE TABLE SystemAdministrator (
-    user_email TEXT PRIMARY KEY REFERENCES User(email)
-);
+--CREATE TABLE FlightAgent (
+--    user_email TEXT PRIMARY KEY REFERENCES User(email)
+--);
+--
+--CREATE TABLE SystemAdministrator (
+--    user_email TEXT PRIMARY KEY REFERENCES User(email)
+--);
 
 CREATE TABLE Airline (
     airline_code TEXT PRIMARY KEY,

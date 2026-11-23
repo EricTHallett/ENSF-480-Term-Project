@@ -17,7 +17,7 @@ public class DatabaseManager {
             connection = DriverManager.getConnection(URL); 
         }
         catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Error initializing database connection", e);
         }
     }
 

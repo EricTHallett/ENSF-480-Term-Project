@@ -22,5 +22,7 @@ public class DatabaseInitializer {
         InputStream is = classloader.getResourceAsStream("seed.sql");        
 
         stmt.executeUpdate(new String(is.readAllBytes()));  
+
+        stmt.close();
     }
 }
