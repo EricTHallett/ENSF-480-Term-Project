@@ -1,27 +1,25 @@
 PRAGMA foreign_keys = ON;
 
-CREATE TABLE Person (
+CREATE TABLE User (
     id INTEGER PRIMARY KEY,
     role TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    is_active INTEGER NOT NULL DEFAULT 1,
-    created_at TEXT NOT NULL,
-    updated_at TEXT NOT NULL
+    is_active INTEGER NOT NULL DEFAULT 1
 );
 
 CREATE TABLE Customer (
-    person_id INTEGER PRIMARY KEY REFERENCES Person(id),
-    promotion_opt_in INTEGER NOT NULL DEFAULT 0
+    person_id INTEGER PRIMARY KEY REFERENCES User(id),
+    promotion_sent_on TEXT
 );
 
 CREATE TABLE FlightAgent (
-    person_id INTEGER PRIMARY KEY REFERENCES Person(id)
+    person_id INTEGER PRIMARY KEY REFERENCES User(id)
 );
 
 CREATE TABLE SystemAdministrator (
-    person_id INTEGER PRIMARY KEY REFERENCES Person(id)
+    person_id INTEGER PRIMARY KEY REFERENCES User(id)
 );
 
 CREATE TABLE Airline (
@@ -56,6 +54,7 @@ CREATE TABLE Flight (
     total_seats INTEGER REFERENCES Aircraft(seats),
     available_seats INTEGER NOT NULL,
     price_cents INTEGER NOT NULL,
+    status TEXT NOT NULL,
     UNIQUE(aircraft_id, departure_time)
 );
 
