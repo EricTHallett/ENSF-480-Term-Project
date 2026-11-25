@@ -59,12 +59,12 @@ CREATE TABLE Flight (
 );
 
 CREATE TABLE Reservation (
-    passenger_id INTEGER NOT NULL,
+    passenger_email INTEGER NOT NULL,
     flight_id INTEGER NOT NULL,
     num_seats INTEGER NOT NULL,
     price_cents INTEGER NOT NULL,
     status TEXT,
-    PRIMARY KEY (passenger_id, flight_id),
-    FOREIGN KEY (passenger_id) REFERENCES passenger(passenger_id),
-    FOREIGN KEY (flight_id) REFERENCES flight(flight_id)
+    PRIMARY KEY (passenger_email, flight_id),
+    FOREIGN KEY (passenger_email) REFERENCES User(passenger_email),
+    FOREIGN KEY (flight_id) REFERENCES Flight(flight_id)
 );

@@ -19,9 +19,9 @@ public class DatabaseInitializer {
         Statement stmt = db.createStatement();
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("seed.sql");        
+        InputStream is = classloader.getResourceAsStream("seed.sql");
 
-        stmt.executeUpdate(new String(is.readAllBytes()));  
+        stmt.executeUpdate(new String(is.readAllBytes()));
 
         stmt.close();
     }
