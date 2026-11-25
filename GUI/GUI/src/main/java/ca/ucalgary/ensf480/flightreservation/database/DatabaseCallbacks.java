@@ -12,7 +12,8 @@ public final class DatabaseCallbacks {
     }
 
     public static void addFlight(String[] args) throws IllegalArgumentException {
-        System.out.println("DatabaseCallbacks.addFlight: " + Arrays.toString(args));
+        throw new IllegalArgumentException("This is a test");
+        //System.out.println("DatabaseCallbacks.addFlight: " + Arrays.toString(args));
     }
 
     public static void removeFlight(String[] args) {
