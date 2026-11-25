@@ -6,7 +6,8 @@ CREATE TABLE User (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     is_active INTEGER NOT NULL DEFAULT 1,
-    promotion_sent_on TEXT
+    promotion_sent_on TEXT,
+    payment_strategy TEXT
 );
 
 --CREATE TABLE Customer (
@@ -62,9 +63,7 @@ CREATE TABLE Reservation (
     flight_id INTEGER NOT NULL,
     num_seats INTEGER NOT NULL,
     price_cents INTEGER NOT NULL,
-    booked_at TEXT NOT NULL,
-    updated_at TEXT NOT NULL,
-    cancelled_at TEXT,
+    status TEXT,
     PRIMARY KEY (passenger_id, flight_id),
     FOREIGN KEY (passenger_id) REFERENCES passenger(passenger_id),
     FOREIGN KEY (flight_id) REFERENCES flight(flight_id)
