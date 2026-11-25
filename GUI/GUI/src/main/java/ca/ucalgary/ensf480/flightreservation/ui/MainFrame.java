@@ -45,9 +45,13 @@ public final class MainFrame extends JFrame {
         JPanel page = new JPanel(new BorderLayout(12, 12));
         page.setBackground(Color.WHITE);
         page.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        JTable table = new JTable(module.getTableData(), module.getTableColumns());
+        UiStyle.table(table);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         page.add(createSearchBar(module), BorderLayout.NORTH);
-        page.add(createActionBar(module), BorderLayout.WEST);
-        page.add(createTableArea(module), BorderLayout.CENTER);
+        page.add(createActionBar(module, table), BorderLayout.WEST);
+        page.add(createTableArea(module, table), BorderLayout.CENTER);
         page.add(createBottomBar(navigation), BorderLayout.SOUTH);
         setContentPane(page);
     }
@@ -92,8 +96,7 @@ public final class MainFrame extends JFrame {
         return bar;
     }
 
-    @SuppressWarnings("unchecked")
-    private JPanel createActionBar(Module module) {
+    private JPanel createActionBar(Module module, JTable table) {
         JPanel bar = new JPanel();
         bar.setLayout(new BoxLayout(bar, BoxLayout.Y_AXIS));
         UiStyle.actionPanel(bar);
@@ -110,7 +113,28 @@ public final class MainFrame extends JFrame {
             JButton button = new JButton(label);
             UiStyle.actionButton(button);
             button.setAlignmentX(CENTER_ALIGNMENT);
-            button.addActionListener(e -> callback.accept(new String[0]));
+            
+            button.addActionListener(e -> {
+                int selectedRow = table.getSelectedRow();
+                boolean requiresSelection = entry.length < 3 || (Boolean) entry[2];
+                if (selectedRow < 0 && requiresSelection) {
+                    JOptionPane.showMessageDialog(this, "Select a table row first.");
+                    return;
+                }
+
+                String[] values = new String[table.getColumnCount()];
+                if (requiresSelection) {
+                    int modelRow = table.convertRowIndexToModel(selectedRow);
+                    for (int i = 0; i < values.length; i++) {
+                        Object value = table.getModel().getValueAt(modelRow, i);
+                        values[i] = value == null ? "" : value.toString();
+                    }
+                } else {
+                    values = new String[0];
+                }
+                callback.accept(values);
+            });
+
             bar.add(button);
             bar.add(Box.createVerticalStrut(10));
         }
@@ -118,12 +142,10 @@ public final class MainFrame extends JFrame {
         return bar;
     }
 
-    private JPanel createTableArea(Module module) {
+    private JPanel createTableArea(Module module, JTable table) {
         String title = module.getClass().getSimpleName().replace("Module", "");
         JPanel panel = new JPanel(new BorderLayout());
         UiStyle.tablePanel(panel, title);
-        JTable table = new JTable(module.getTableData(), module.getTableColumns());
-        UiStyle.table(table);
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
         return panel;
     }
