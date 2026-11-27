@@ -11,7 +11,7 @@ public final class ReservationsModule implements Module {
         {"Remove Reservation", (Consumer<String[]>) this::removeReservation},
     };
     public String[] getSearchFields() {
-        return new String[]{"Reservation ID","Customer ID","Flight ID"};
+        return new String[]{"Email", "Flight Id", "Booked Seats", "Price", "Status","Payment"};
     }
     public Consumer<String[]> getSearchCallback() { return this::search; }
     public Object[][] getActionButtonArray() { return actionButtons; }
@@ -24,7 +24,7 @@ public final class ReservationsModule implements Module {
 
 
     //Data Base Callbacks go here
-    public String[] getTableColumns() { return new String[]{"Reservation ID", "Customer ID", "Flight ID", "Status"}; }
+    public String[] getTableColumns() { return new String[]{"Email", "Flight Id", "Booked Seats", "Price", "Status","Payment"}; }
     public Object[][] getTableData() {
         return DatabaseCallbacks.listReservations();
     }

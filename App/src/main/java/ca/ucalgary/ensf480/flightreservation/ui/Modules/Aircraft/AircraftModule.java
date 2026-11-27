@@ -15,7 +15,7 @@ public final class AircraftModule implements Module {
     };
 
     public String[] getSearchFields() {
-        return new String[]{"Aircraft ID","Status"};
+        return new String[]{"Aircraft Id","Aircraft Model","Seats","Is Active"};
     }
 
     public Consumer<String[]> getSearchCallback() { return this::search; }
@@ -27,7 +27,7 @@ public final class AircraftModule implements Module {
     //Module Interface
     public void search(String[] values) { DatabaseCallbacks.searchAircraft(values); }
     public void addAircraft(String[] args) {
-        AircraftDialog.showDialog(DatabaseCallbacks::addAircraft);
+        AircraftDialog.showDialog(DatabaseCallbacks::addAircraft, new AircraftModule());
     }
     public void viewAircraft(String[] args) { DatabaseCallbacks.viewAircraft(args); }
     public void deactivateAircraft(String[] args) { DatabaseCallbacks.deactivateAircraft(args); }
@@ -36,7 +36,7 @@ public final class AircraftModule implements Module {
 
 
     //Callbacks here
-    public String[] getTableColumns() { return new String[]{"Aircraft ID", "Status"}; }
+    public String[] getTableColumns() { return new String[]{"Aircraft ID", "Aircraft Model", "Seats", "Is Active"}; }
     public Object[][] getTableData() {
         return DatabaseCallbacks.listAircraft();
     }
