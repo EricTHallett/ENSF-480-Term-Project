@@ -6,6 +6,7 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 source_dir="$script_dir/src/main/java"
 main_class="ca.ucalgary.ensf480.flightreservation.App"
 build_dir="$(mktemp -d /tmp/flight-ui-classes.XXXXXX)"
+sqlite_jar="/usr/share/java/sqlite-jdbc.jar"
 
 cleanup() {
     rm -rf -- "$build_dir"
@@ -20,7 +21,10 @@ if (( ${#java_sources[@]} == 0 )); then
 fi
 
 echo "Compiling ${#java_sources[@]} Java source file(s)..."
-javac -Xlint:all -d "$build_dir" "${java_sources[@]}"
+javac -Xlint:all -cp "$sqlite_jar" -d "$build_dir" "${java_sources[@]}"
+if [[ -d "$script_dir/src/main/resources" ]]; then
+    cp -r "$script_dir/src/main/resources/." "$build_dir/"
+fi
 
 if [[ "${1:-}" == "--compile-only" ]]; then
     echo "Compilation completed successfully."
@@ -33,4 +37,4 @@ if (( $# > 0 )); then
 fi
 
 echo "Starting Flight Reservation UI..."
-java -cp "$build_dir" "$main_class"
+java -cp "$build_dir:$sqlite_jar" "$main_class"
