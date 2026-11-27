@@ -20,12 +20,14 @@ public final class UiStyle {
 
     private UiStyle() {}
 
-    public static void searchPanel(JPanel panel) {
-        panel.setBackground(SEARCH_BACKGROUND);
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(108, 142, 191)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-    }
+public static void searchPanel(JPanel panel) {
+    panel.setBackground(SEARCH_BACKGROUND);
+    panel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(108, 142, 191)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+    panel.setMaximumSize(new Dimension(30, Integer.MAX_VALUE));
+}
 
     public static void actionPanel(JPanel panel) {
         panel.setPreferredSize(new Dimension(220, 0));

@@ -15,30 +15,31 @@ public final class FlightsModule implements Module {
     };
 
     public String[] getSearchFields() {
-        return new String[]{"Flight ID", "Origin", "Destination"};
+        return new String[]{"Flight Id","Airline","Depature Time","Arrival Time","Total Seats","Available Seats","Price","Origin","Destination","Status"};
     }
 
-    public Consumer<String[]> getSearchCallback() {
-        return this::search;
-    }
 
     public Object[][] getActionButtonArray() {
         return actionButtons;
     }
 
 
-    public void search(String[] text) { DatabaseCallbacks.searchFlights(text); }
     public void addFlight(String[] args) {
-        FlightDialog.showDialog(DatabaseCallbacks::addFlight);
+        FlightDialog.showDialog(DatabaseCallbacks::addFlight,new FlightsModule());
     }
     public void removeFlight(String[] text) { DatabaseCallbacks.removeFlight(text); }
     public void updateFlight(String[] text) { DatabaseCallbacks.updateFlight(text); }
+
     public void cancelFlight(String[] text) { DatabaseCallbacks.cancelFlight(text); }
+
+    public Object[][] searchDatabase(String[] value){
+        return DatabaseCallbacks.searchFlight(value);
+    }
 
 
     //Call backs here
     public String[] getTableColumns() {
-        return new String[]{"Flight ID", "Origin", "Destination", "Status"};
+        return new String[]{"Flight Id","Airline","Depature Time","Arrival Time","Total Seats","Available Seats","Price","Origin","Destination","Status"};
     }
     public Object[][] getTableData() {
         return DatabaseCallbacks.listFlights();

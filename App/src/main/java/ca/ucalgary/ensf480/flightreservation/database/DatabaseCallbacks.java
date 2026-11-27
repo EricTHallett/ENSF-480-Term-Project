@@ -17,8 +17,9 @@ public final class DatabaseCallbacks {
 
     // Flights
 
-    public static void searchFlights(String[] args) {
+    public static Object[][] searchFlight(String[] args) {
         System.out.println("DatabaseCallbacks.searchFlights: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void addFlight(String[] args) throws IllegalArgumentException {
@@ -47,8 +48,9 @@ public final class DatabaseCallbacks {
 
     // Reservations
 
-    public static void searchReservations(String[] args) {
+    public static Object[][] searchReservation(String[] args) {
         System.out.println("DatabaseCallbacks.searchReservations: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void viewReservation(String[] args) {
@@ -71,9 +73,46 @@ public final class DatabaseCallbacks {
     }
 
     // Customers
+    public static Object[][] searchCustomers(String[] args) {
+        String sql = """
+                SELECT * FROM User
+                WHERE email LIKE ?
+                AND role LIKE ?
+                AND first_name LIKE ?
+                AND last_name LIKE ?
+                AND CASE WHEN is_active = 1
+                        THEN 'true' ELSE 'false' END LIKE ?
+                AND COALESCE(promotion_sent_on, '') LIKE ?
+                """;
 
-    public static void searchCustomers(String[] args) {
-        System.out.println("DatabaseCallbacks.searchCustomers: " + Arrays.toString(args));
+
+        ArrayList<Object[]> rows = new ArrayList<>();
+        Connection connection = DatabaseManager.getInstance().getConnection();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            for (int i = 0; i < args.length; i++) {
+                stmt.setString(i + 1, "%" + args[i].trim() + "%");
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    rows.add(new Object[]{
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getBoolean("is_active"),
+                        rs.getString("promotion_sent_on")
+                    });
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to retrieve customers", e);
+        }
+
+        return rows.toArray(new Object[0][]);
     }
 
     public static void addCustomer(String[] args) throws IllegalArgumentException {
@@ -95,7 +134,6 @@ public final class DatabaseCallbacks {
     public static void deleteCustomer(String[] args) {
         System.out.println("DatabaseCallbacks.deleteCustomer: " + Arrays.toString(args));
     }
-
     public static Object[][] listCustomers() {
         // Placeholder data until a search query is implemented.
         return USERS.findAll().stream().filter(u -> u.getRole() == UserRole.CUSTOMER)
@@ -105,8 +143,9 @@ public final class DatabaseCallbacks {
 
     // Aircraft
 
-    public static void searchAircraft(String[] args) {
+    public static Object[][] searchAircraft(String[] args) {
         System.out.println("DatabaseCallbacks.searchAircraft: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void addAircraft(String[] args) throws IllegalArgumentException {

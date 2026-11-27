@@ -11,7 +11,8 @@ public final class App {
     private App() {
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, IOException{
+        DatabaseInitializer.main(args);
         SwingUtilities.invokeLater(() -> {
             useSystemDefaults();
             try {
