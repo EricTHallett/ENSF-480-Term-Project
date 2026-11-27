@@ -14,9 +14,8 @@ import ca.ucalgary.ensf480.flightreservation.domain.Flight;
 public class FlightDAO implements DAO<Flight> {
     private Connection dbConnect;
     private static final String SELECT_FLIGHT =
-            "SELECT f.id, a.name AS airline, r.origin, r.destination, f.departure_time, f.arrival_time, f.price_cents, " +
-                    "f.total_seats, f.available_seats, f.status FROM Flight f JOIN Airline a ON f.airline_code = a.airline_code " +
-                    "JOIN Route r ON f.route_id = r.id";
+            "SELECT f.id, a.name AS airline, f.origin, f.destination, f.departure_time, f.arrival_time, f.price_cents, " +
+                    "f.total_seats, f.available_seats, f.status FROM Flight f";
 
     public FlightDAO(Connection dbConnect) {
             this.dbConnect = dbConnect;
@@ -38,54 +37,21 @@ public class FlightDAO implements DAO<Flight> {
         return new Flight(flightId, airline, origin, destination, departure, arrival, price, totalSeats, availableSeats, status);
     }
 
-    //Helpers
-    private String findAirlineCode(String airlineName) throws SQLException {
-        PreparedStatement stmt = dbConnect.prepareStatement("SELECT airline_code FROM Airline WHERE name = ?");
-        stmt.setString(1, airlineName);
-        ResultSet results = stmt.executeQuery();
-
-        String code = null;
-        if (results.next()) {
-            code = results.getString("airline_code");
-        }
-        results.close();
-        stmt.close();
-
-        if (code == null) throw new IllegalArgumentException("Unknown airline: " + airlineName);
-        return code;
-    }
-
-    private int findRouteId(String origin, String destination) throws SQLException {
-        PreparedStatement stmt = dbConnect.prepareStatement("SELECT id FROM Route WHERE origin = ? AND destination = ?");
-        stmt.setString(1, origin);
-        stmt.setString(2, destination);
-        ResultSet results = stmt.executeQuery();
-
-        int id = -1;
-        if (results.next()) {
-            id = results.getInt("id");
-        }
-        results.close();
-        stmt.close();
-
-        if (id == -1) throw new IllegalArgumentException("No route from " + origin + " to " + destination);
-        return id;
-    }
-
     @Override
     public void add(Flight flight) {
         try {
             PreparedStatement stmt = dbConnect.prepareStatement(
-                    "INSERT INTO Flight (airline_code, route_id, departure_time, arrival_time, total_seats, available_seats," +
+                    "INSERT INTO Flight (airline_code, origin, destination, departure_time, arrival_time, total_seats, available_seats," +
                             " price_cents, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, findAirlineCode(flight.getAirline()));
-            stmt.setInt(2, findRouteId(flight.getOrigin(), flight.getDestination()));
-            stmt.setString(3, flight.getDepartureTime().toString());
-            stmt.setString(4, flight.getArrivalTime().toString());
-            stmt.setInt(5, flight.getTotalSeats());
-            stmt.setInt(6, flight.getAvailableSeats());
-            stmt.setLong(7, Math.round(flight.getPrice() * 100));
-            stmt.setString(8, flight.getStatus().name());
+            stmt.setString(1, flight.getAirline());
+            stmt.setString(2, flight.getOrigin());
+            stmt.setString(3, flight.getDestination());
+            stmt.setString(4, flight.getDepartureTime().toString());
+            stmt.setString(5, flight.getArrivalTime().toString());
+            stmt.setInt(6, flight.getTotalSeats());
+            stmt.setInt(7, flight.getAvailableSeats());
+            stmt.setLong(8, Math.round(flight.getPrice() * 100));
+            stmt.setString(9, flight.getStatus().name());
 
             stmt.executeUpdate();
 
@@ -105,16 +71,17 @@ public class FlightDAO implements DAO<Flight> {
     public void update(Flight flight) {
         try {
             PreparedStatement stmt = dbConnect.prepareStatement(
-                    "UPDATE Flight SET airline_code=?, route_id=?, departure_time=?, arrival_time=?, available_seats=?, " +
+                    "UPDATE Flight SET airline_code=?, origin=?, destination=?, departure_time=?, arrival_time=?, available_seats=?, " +
                             "price_cents=?, status=? WHERE id=?");
-            stmt.setString(1, findAirlineCode(flight.getAirline()));
-            stmt.setInt(2, findRouteId(flight.getOrigin(), flight.getDestination()));
-            stmt.setString(3, flight.getDepartureTime().toString());
-            stmt.setString(4, flight.getArrivalTime().toString());
-            stmt.setInt(5, flight.getAvailableSeats());
-            stmt.setLong(6, Math.round(flight.getPrice() * 100));
-            stmt.setString(7, flight.getStatus().name());
-            stmt.setInt(8, flight.getFlightId());
+            stmt.setString(1, flight.getAirline());
+            stmt.setString(2, flight.getOrigin());
+            stmt.setString(3, flight.getDestination());
+            stmt.setString(4, flight.getDepartureTime().toString());
+            stmt.setString(5, flight.getArrivalTime().toString());
+            stmt.setInt(6, flight.getAvailableSeats());
+            stmt.setLong(7, Math.round(flight.getPrice() * 100));
+            stmt.setString(8, flight.getStatus().name());
+            stmt.setInt(9, flight.getFlightId());
 
             stmt.executeUpdate();
             stmt.close();
@@ -144,6 +111,7 @@ public class FlightDAO implements DAO<Flight> {
         }
         return ret;
     }
+
     public List<Flight> findAll() {
         List<Flight> flights = new ArrayList<>();
 

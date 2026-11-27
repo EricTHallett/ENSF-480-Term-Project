@@ -96,6 +96,10 @@ public class Flight {
         this.flightId = id;
     }
 
+    public int getId() {
+        return flightId;
+    }
+
     // admin modifies flight (reschedule or delay)
     public void updateSchedule(LocalDateTime newDeparture, LocalDateTime newArrival) {
         requireEditable();
