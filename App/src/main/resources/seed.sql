@@ -68,3 +68,8 @@ CREATE TABLE Reservation (
     FOREIGN KEY (passenger_email) REFERENCES User(passenger_email),
     FOREIGN KEY (flight_id) REFERENCES Flight(flight_id)
 );
+
+INSERT INTO User (email, role, first_name, last_name, is_active, promotion_sent_on, payment_strategy) VALUES
+    ("john.doe@email.com", "CUSTOMER", "John", "Doe", 1, "2026-10-30", NULL),
+    ("jane.doe@email.com", "FLIGHT_AGENT", "Jane", "Doe", 1, "2026-11-26", NULL)
+;
