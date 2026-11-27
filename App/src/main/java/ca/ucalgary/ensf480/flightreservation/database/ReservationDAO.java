@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ca.ucalgary.ensf480.flightreservation.domain.Flight;
 import ca.ucalgary.ensf480.flightreservation.domain.Reservation;
 import ca.ucalgary.ensf480.flightreservation.domain.ReservationStatus;
 import ca.ucalgary.ensf480.flightreservation.domain.User;

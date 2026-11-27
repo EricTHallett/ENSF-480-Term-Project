@@ -14,7 +14,7 @@ public class Reservation {
         this.passenger = passenger;
         this.flight = flight;
         this.numSeats = numSeats;
-        this.priceCents = flight.calculateTotal() * 100;
+        this.priceCents = (int)flight.calculateTotal(numSeats) * 100;
         this.status = status;
     }
 
@@ -22,7 +22,7 @@ public class Reservation {
         return passenger;
     }
 
-    public int getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
