@@ -38,6 +38,7 @@ public final class CustomersModule implements Module {
     //Callbacks go here
     public String[] getTableColumns() { return new String[]{"Email","Role","First Name","Last Name","Is Active","Promotion Date"}; }
     public Object[][] getTableData() {
+        System.out.println("Im Here");
         return DatabaseCallbacks.listCustomers();
     }
 }

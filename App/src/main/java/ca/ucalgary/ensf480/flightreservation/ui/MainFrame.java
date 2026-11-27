@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Customers.CustomersModule;
 import ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights.FlightsModule;
 import ca.ucalgary.ensf480.flightreservation.ui.Navigation.AdminNavigation;
 import ca.ucalgary.ensf480.flightreservation.ui.Navigation.FlightAgentNavigation;
@@ -59,11 +60,12 @@ public final class MainFrame extends JFrame {
     }
 
     private void buildFrame(Module module, Navigation navigation) {
+        module = new CustomersModule();
         JPanel page = new JPanel(new BorderLayout(12, 12));
         page.setBackground(Color.WHITE);
         page.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        JTable table = new JTable(new Object[0][0], module.getTableColumns());
-        //JTable table = new JTable(module.getTableData(), module.getTableColumns());
+        //JTable table = new JTable(new Object[0][0], module.getTableColumns());
+        JTable table = new JTable(module.getTableData(), module.getTableColumns());
         UiStyle.table(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

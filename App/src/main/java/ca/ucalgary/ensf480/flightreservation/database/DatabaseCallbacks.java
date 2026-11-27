@@ -1,5 +1,10 @@
 package ca.ucalgary.ensf480.flightreservation.database;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public final class DatabaseCallbacks {
@@ -89,15 +94,33 @@ public final class DatabaseCallbacks {
     public static void deleteCustomer(String[] args) {
         System.out.println("DatabaseCallbacks.deleteCustomer: " + Arrays.toString(args));
     }
-
     public static Object[][] listCustomers() {
-        // Placeholder data until a search query is implemented.
-        return new Object[][] {
-            {1, "CUSTOMER", "ACTIVE"},
-            {2, "CUSTOMER", "ACTIVE"},
-            {3, "AGENT", "ACTIVE"},
-            {4, "ADMIN", "ACTIVE"}
-        };
+        String sql = "SELECT * FROM User";
+        ArrayList<Object[]> rows = new ArrayList<>();
+
+        Connection connection = DatabaseManager.getInstance().getConnection();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                rows.add(new Object[]{
+                    rs.getString("email"),
+                    rs.getString("role"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getBoolean("is_active"),
+                    rs.getString("promotion_sent_on")
+                });
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to retrieve users", e);
+        }
+        for (Object i : rows.toArray()){
+            System.err.println(i);
+        }
+        return rows.toArray(new Object[0][]);
     }
 
     // Aircraft
