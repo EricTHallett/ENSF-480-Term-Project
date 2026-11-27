@@ -1,4 +1,4 @@
-package domain;
+package ca.ucalgary.ensf480.flightreservation.domain;
 import java.time.LocalDateTime;
 
 public class FlightTest {
