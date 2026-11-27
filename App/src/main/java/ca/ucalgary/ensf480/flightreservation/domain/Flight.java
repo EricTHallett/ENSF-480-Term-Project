@@ -91,7 +91,7 @@ public class Flight {
 
     // use with DAO when insertinng a new flight, stores the ID from database
     public void assignId(int id) {
-        if (flightId != 0) throw new IllegalStateException("Flight already assigned an id");
+        if (flightId != 0) throw new IllegalArgumentException("Flight already assigned an id");
         if (id < 1)  throw new IllegalArgumentException("Flight id must be positive");
         this.flightId = id;
     }
@@ -174,6 +174,6 @@ public class Flight {
     }
 
     private void requireEditable() {
-        if (status == FlightStatus.REMOVED || status == FlightStatus.DEPARTED) throw new IllegalStateException("Cannot modify REMOVED or DEPARTED flights");
+        if (status == FlightStatus.REMOVED || status == FlightStatus.DEPARTED) throw new IllegalArgumentException("Cannot modify REMOVED or DEPARTED flights");
     }
 }
