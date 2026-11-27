@@ -1,15 +1,32 @@
 package ca.ucalgary.ensf480.flightreservation.ui;
 
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights.FlightsModule;
-import ca.ucalgary.ensf480.flightreservation.ui.Navigation.*;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Dimension;
 import java.util.function.Consumer;
-import javax.swing.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights.FlightsModule;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.AdminNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.FlightAgentNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.Navigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.SuperUserNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.UserNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Styling.UiStyle;
 
 public final class MainFrame extends JFrame {
     private final Navigation navigation;
@@ -45,7 +62,8 @@ public final class MainFrame extends JFrame {
         JPanel page = new JPanel(new BorderLayout(12, 12));
         page.setBackground(Color.WHITE);
         page.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        JTable table = new JTable(module.getTableData(), module.getTableColumns());
+        JTable table = new JTable(new Object[0][0], module.getTableColumns());
+        //JTable table = new JTable(module.getTableData(), module.getTableColumns());
         UiStyle.table(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -63,7 +81,7 @@ public final class MainFrame extends JFrame {
         UiStyle.heading(heading);
         bar.add(heading, BorderLayout.NORTH);
 
-        JPanel fieldsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel fieldsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         fieldsPanel.setOpaque(false);
         String[] labels = module.getSearchFields();
         JTextField[] fields = new JTextField[labels.length];
@@ -72,7 +90,7 @@ public final class MainFrame extends JFrame {
             JPanel fieldPanel = new JPanel(new BorderLayout(0, 2));
             fieldPanel.setOpaque(false);
             fieldPanel.add(new JLabel(labels[i]), BorderLayout.NORTH);
-            fields[i] = new JTextField(12);
+            fields[i] = new JTextField(8);
             fieldPanel.add(fields[i], BorderLayout.CENTER);
             fieldsPanel.add(fieldPanel);
         }

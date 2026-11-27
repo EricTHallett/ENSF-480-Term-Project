@@ -15,7 +15,7 @@ public final class CustomersModule implements Module {
     };
 
     public String[] getSearchFields() {
-        return new String[]{"Person ID","Status"};
+        return new String[]{"Email","Role","First Name","Last Name","Is Active","Promotion Date"};
     }
 
     public Consumer<String[]> getSearchCallback() { return this::search; }
@@ -27,7 +27,7 @@ public final class CustomersModule implements Module {
     //Module Interface
     public void search(String[] values) { DatabaseCallbacks.searchCustomers(values); }
     public void addCustomer(String[] args) {
-        CustomerDialog.showDialog(DatabaseCallbacks::addCustomer);
+        CustomerDialog.showDialog(DatabaseCallbacks::addCustomer,new CustomersModule());
     }
     public void viewCustomer(String[] args) { DatabaseCallbacks.viewCustomer(args); }
     public void deactivateCustomer(String[] args) { DatabaseCallbacks.deactivateCustomer(args); }
@@ -36,7 +36,7 @@ public final class CustomersModule implements Module {
 
 
     //Callbacks go here
-    public String[] getTableColumns() { return new String[]{"Person ID", "Role", "Status"}; }
+    public String[] getTableColumns() { return new String[]{"Email","Role","First Name","Last Name","Is Active","Promotion Date"}; }
     public Object[][] getTableData() {
         return DatabaseCallbacks.listCustomers();
     }
