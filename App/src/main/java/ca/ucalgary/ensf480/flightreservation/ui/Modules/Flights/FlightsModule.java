@@ -17,16 +17,12 @@ public final class FlightsModule implements Module {
         return new String[]{"Flight Id","Airline","Depature Time","Arrival Time","Total Seats","Available Seats","Price","Origin","Destination","Status"};
     }
 
-    public Consumer<String[]> getSearchCallback() {
-        return this::search;
-    }
 
     public Object[][] getActionButtonArray() {
         return actionButtons;
     }
 
 
-    public void search(String[] text) { DatabaseCallbacks.searchFlights(text); }
     public void addFlight(String[] args) {
         FlightDialog.showDialog(DatabaseCallbacks::addFlight,new FlightsModule());
     }
@@ -34,7 +30,7 @@ public final class FlightsModule implements Module {
     public void updateFlight(String[] text) { DatabaseCallbacks.updateFlight(text); }
     public void cancleFlight(String[] text) { DatabaseCallbacks.cancelFlight(text); }
     public Object[][] searchDatabase(String[] value){
-        return new Object[0][0];
+        return DatabaseCallbacks.searchFlight(value);
     }
 
 

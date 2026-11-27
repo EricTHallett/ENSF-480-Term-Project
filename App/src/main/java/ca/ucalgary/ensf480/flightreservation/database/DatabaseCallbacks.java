@@ -12,8 +12,9 @@ public final class DatabaseCallbacks {
 
     // Flights
 
-    public static void searchFlights(String[] args) {
+    public static Object[][] searchFlight(String[] args) {
         System.out.println("DatabaseCallbacks.searchFlights: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void addFlight(String[] args) throws IllegalArgumentException {
@@ -44,8 +45,9 @@ public final class DatabaseCallbacks {
 
     // Reservations
 
-    public static void searchReservations(String[] args) {
+    public static Object[][] searchReservation(String[] args) {
         System.out.println("DatabaseCallbacks.searchReservations: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void viewReservation(String[] args) {
@@ -162,8 +164,9 @@ public final class DatabaseCallbacks {
 
     // Aircraft
 
-    public static void searchAircraft(String[] args) {
+    public static Object[][] searchAircraft(String[] args) {
         System.out.println("DatabaseCallbacks.searchAircraft: " + Arrays.toString(args));
+        return new Object[0][0];
     }
 
     public static void addAircraft(String[] args) throws IllegalArgumentException {

@@ -13,14 +13,12 @@ public final class ReservationsModule implements Module {
     public String[] getSearchFields() {
         return new String[]{"Email", "Flight Id", "Booked Seats", "Price", "Status","Payment"};
     }
-    public Consumer<String[]> getSearchCallback() { return this::search; }
     public Object[][] getActionButtonArray() { return actionButtons; }
-    public void search(String[] values) { DatabaseCallbacks.searchReservations(values); }
     public void viewReservation(String[] args) { DatabaseCallbacks.viewReservation(args); }
     public void cancelReservation(String[] args) { DatabaseCallbacks.cancelReservation(args); }
     public void removeReservation(String[] args) { DatabaseCallbacks.removeReservation(args); }
     public Object[][] searchDatabase(String[] value){
-        return new Object[0][0];
+        return DatabaseCallbacks.searchReservation(value);
     }
 
 

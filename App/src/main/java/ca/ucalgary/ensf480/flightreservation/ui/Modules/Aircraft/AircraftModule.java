@@ -18,14 +18,12 @@ public final class AircraftModule implements Module {
         return new String[]{"Aircraft Id","Aircraft Model","Seats","Is Active"};
     }
 
-    public Consumer<String[]> getSearchCallback() { return this::search; }
 
     public Object[][] getActionButtonArray() { return actionButtons; }
 
 
 
     //Module Interface
-    public void search(String[] values) { DatabaseCallbacks.searchAircraft(values); }
     public void addAircraft(String[] args) {
         AircraftDialog.showDialog(DatabaseCallbacks::addAircraft, new AircraftModule());
     }
@@ -34,7 +32,7 @@ public final class AircraftModule implements Module {
     public void reactivateAircraft(String[] args) { DatabaseCallbacks.reactivateAircraft(args); }
     public void deleteAircraft(String[] args) { DatabaseCallbacks.deleteAircraft(args); }
     public Object[][] searchDatabase(String[] value){
-        return new Object[0][0];
+        return DatabaseCallbacks.searchAircraft(value);
     }
 
 

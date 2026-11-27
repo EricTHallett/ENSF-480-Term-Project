@@ -18,7 +18,6 @@ public final class CustomersModule implements Module {
         return new String[]{"Email","Role","First Name","Last Name","Is Active","Promotion Date"};
     }
 
-    public Consumer<String[]> getSearchCallback() { return this::search; }
 
     public Object[][] getActionButtonArray() { return actionButtons; }
 
@@ -34,9 +33,6 @@ public final class CustomersModule implements Module {
     public void reactivateCustomer(String[] args) { DatabaseCallbacks.reactivateCustomer(args); }
     public void deleteCustomer(String[] args) { DatabaseCallbacks.deleteCustomer(args); }
     public Object[][] searchDatabase(String[] value){
-        for (String s : value){
-            System.out.println(s);
-        }
         return DatabaseCallbacks.searchCustomers(value);
     }
 
