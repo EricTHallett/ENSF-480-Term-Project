@@ -33,6 +33,9 @@ public final class AircraftModule implements Module {
     public void deactivateAircraft(String[] args) { DatabaseCallbacks.deactivateAircraft(args); }
     public void reactivateAircraft(String[] args) { DatabaseCallbacks.reactivateAircraft(args); }
     public void deleteAircraft(String[] args) { DatabaseCallbacks.deleteAircraft(args); }
+    public Object[][] searchDatabase(String[] value){
+        return new Object[0][0];
+    }
 
 
     //Callbacks here

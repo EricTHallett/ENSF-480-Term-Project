@@ -33,6 +33,9 @@ public final class FlightsModule implements Module {
     public void removeFlight(String[] text) { DatabaseCallbacks.removeFlight(text); }
     public void updateFlight(String[] text) { DatabaseCallbacks.updateFlight(text); }
     public void cancleFlight(String[] text) { DatabaseCallbacks.cancelFlight(text); }
+    public Object[][] searchDatabase(String[] value){
+        return new Object[0][0];
+    }
 
 
     //Call backs here

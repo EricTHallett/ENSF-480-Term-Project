@@ -33,6 +33,12 @@ public final class CustomersModule implements Module {
     public void deactivateCustomer(String[] args) { DatabaseCallbacks.deactivateCustomer(args); }
     public void reactivateCustomer(String[] args) { DatabaseCallbacks.reactivateCustomer(args); }
     public void deleteCustomer(String[] args) { DatabaseCallbacks.deleteCustomer(args); }
+    public Object[][] searchDatabase(String[] value){
+        for (String s : value){
+            System.out.println(s);
+        }
+        return DatabaseCallbacks.searchCustomers(value);
+    }
 
 
     //Callbacks go here

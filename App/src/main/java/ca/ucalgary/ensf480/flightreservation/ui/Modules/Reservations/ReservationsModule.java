@@ -19,7 +19,9 @@ public final class ReservationsModule implements Module {
     public void viewReservation(String[] args) { DatabaseCallbacks.viewReservation(args); }
     public void cancelReservation(String[] args) { DatabaseCallbacks.cancelReservation(args); }
     public void removeReservation(String[] args) { DatabaseCallbacks.removeReservation(args); }
-
+    public Object[][] searchDatabase(String[] value){
+        return new Object[0][0];
+    }
 
 
 

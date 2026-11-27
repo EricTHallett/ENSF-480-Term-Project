@@ -70,9 +70,46 @@ public final class DatabaseCallbacks {
     }
 
     // Customers
+    public static Object[][] searchCustomers(String[] args) {
+        String sql = """
+                SELECT * FROM User
+                WHERE email LIKE ?
+                AND role LIKE ?
+                AND first_name LIKE ?
+                AND last_name LIKE ?
+                AND CASE WHEN is_active = 1
+                        THEN 'true' ELSE 'false' END LIKE ?
+                AND COALESCE(promotion_sent_on, '') LIKE ?
+                """;
 
-    public static void searchCustomers(String[] args) {
-        System.out.println("DatabaseCallbacks.searchCustomers: " + Arrays.toString(args));
+
+        ArrayList<Object[]> rows = new ArrayList<>();
+        Connection connection = DatabaseManager.getInstance().getConnection();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            for (int i = 0; i < args.length; i++) {
+                stmt.setString(i + 1, "%" + args[i].trim() + "%");
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    rows.add(new Object[]{
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getBoolean("is_active"),
+                        rs.getString("promotion_sent_on")
+                    });
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to retrieve customers", e);
+        }
+
+        return rows.toArray(new Object[0][]);
     }
 
     public static void addCustomer(String[] args) throws IllegalArgumentException {
