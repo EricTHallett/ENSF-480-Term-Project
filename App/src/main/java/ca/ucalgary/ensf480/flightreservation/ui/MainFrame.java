@@ -60,7 +60,7 @@ public final class MainFrame extends JFrame {
     }
 
     private void buildFrame(Module module, Navigation navigation) {
-        module = new CustomersModule();
+        //module = new CustomersModule();
         JPanel page = new JPanel(new BorderLayout(12, 12));
         page.setBackground(Color.WHITE);
         page.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
