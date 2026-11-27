@@ -1,9 +1,10 @@
 package ca.ucalgary.ensf480.flightreservation.ui.Modules.Customers;
 
 import java.util.function.Consumer;
+
+import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
 import ca.ucalgary.ensf480.flightreservation.ui.Dialogs.CustomerDialog;
 import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
-import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
 
 public final class CustomersModule implements Module {
     private final Object[][] actionButtons = {
@@ -40,7 +41,6 @@ public final class CustomersModule implements Module {
     //Callbacks go here
     public String[] getTableColumns() { return new String[]{"Email","Role","First Name","Last Name","Is Active","Promotion Date"}; }
     public Object[][] getTableData() {
-        System.out.println("Im Here");
         return DatabaseCallbacks.listCustomers();
     }
 }

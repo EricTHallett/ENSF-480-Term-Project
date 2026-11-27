@@ -46,7 +46,9 @@ public final class DatabaseCallbacks {
     public static Object[][] listFlights() {
         // Placeholder data until a SELECT query is implemented.
         return FLIGHTS.findAll().stream()
-                .map(f -> new Object[]{f.getId(), f.getOrigin(), f.getDestination(), f.getStatus().name()})
+                .map(f -> new Object[]{f.getId(), f.getAirline(), f.getDepartureTime(), f.getArrivalTime(),
+                     f.getTotalSeats(), f.getAvailableSeats(), f.getPrice(), f.getOrigin(),
+                     f.getDestination(), f.getStatus().name()})
                 .toArray(Object[][]::new);
     }
 
@@ -70,10 +72,10 @@ public final class DatabaseCallbacks {
     }
 
     public static Object[][] listReservations() {
-        // Placeholder data until a search query is implemented.
         return RESERVATIONS.findAll().stream()
-                .map(r -> new Object[]{r.getPassenger().getEmail(), r.getFlight().getId(), r.getStatus().name()})
-                .toArray(Object[][]::new);
+            .map(r -> new Object[]{r.getPassenger().getEmail(), r.getFlight().getId(), r.getNumSeats(),
+                    r.getPriceCents() / 100.0, r.getStatus().name(), r.getPaymentStrategy()})
+            .toArray(Object[][]::new);
     }
 
     // Customers
@@ -87,6 +89,7 @@ public final class DatabaseCallbacks {
                 AND CASE WHEN is_active = 1
                         THEN 'true' ELSE 'false' END LIKE ?
                 AND COALESCE(promotion_sent_on, '') LIKE ?
+                AND role = 'CUSTOMER'
                 """;
 
 
@@ -141,7 +144,7 @@ public final class DatabaseCallbacks {
     public static Object[][] listCustomers() {
         // Placeholder data until a search query is implemented.
         return USERS.findAll().stream().filter(u -> u.getRole() == UserRole.CUSTOMER)
-                .map(u -> new Object[]{u.getEmail(), u.getRole().name(), u.isActive() ? "ACTIVE" : "INACTIVE"})
+                .map(u -> new Object[]{u.getEmail(), u.getRole().name(), u.getFirstName(), u.getLastName(), u.isActive() ? "ACTIVE" : "INACTIVE", u.getPromotionSentOn()})
                 .toArray(Object[][]::new);
     }
 
@@ -173,9 +176,8 @@ public final class DatabaseCallbacks {
     }
 
     public static Object[][] listAircraft() {
-        // Placeholder data until a SELECT query is implemented.
         return AIRCRAFT.findAll().stream()
-                .map(a -> new Object[]{a.getId(), a.isActive() ? "ACTIVE" : "INACTIVE"})
+                .map(a -> new Object[]{a.getId(), a.getModel(), a.getSeats(), a.isActive()})
                 .toArray(Object[][]::new);
     }
 
