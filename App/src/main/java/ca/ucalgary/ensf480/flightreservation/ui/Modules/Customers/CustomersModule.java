@@ -36,8 +36,6 @@ public final class CustomersModule implements Module {
 
 
     //Callbacks go here
-    public String[] getTableColumns() { return new String[]{"Person ID", "Role", "Status"}; }
-    public Object[][] getTableData() {
-        return DatabaseCallbacks.listCustomers();
-    }
+    public String[] getTableColumns() { return new String[]{"Email", "Role", "Status"}; }
+    public Object[][] getTableData() { return DatabaseCallbacks.listCustomers(); }
 }

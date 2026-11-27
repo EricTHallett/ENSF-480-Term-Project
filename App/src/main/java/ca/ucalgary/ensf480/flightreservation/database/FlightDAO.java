@@ -1,21 +1,20 @@
 package ca.ucalgary.ensf480.flightreservation.database;
 
+import ca.ucalgary.ensf480.flightreservation.domain.Flight;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Statement;
-
-import ca.ucalgary.ensf480.flightreservation.domain.Flight;
 
 public class FlightDAO implements DAO<Flight> {
     private Connection dbConnect;
     private static final String SELECT_FLIGHT =
-            "SELECT f.id, a.name AS airline, f.origin, f.destination, f.departure_time, f.arrival_time, f.price_cents, " +
-                    "f.total_seats, f.available_seats, f.status FROM Flight f";
+            "SELECT f.id, f.airline_code AS airline, f.origin, f.destination, f.departure_time, " +
+            "f.arrival_time, f.price_cents, f.total_seats, f.available_seats, f.status FROM Flight f";
 
     public FlightDAO(Connection dbConnect) {
             this.dbConnect = dbConnect;
@@ -42,7 +41,7 @@ public class FlightDAO implements DAO<Flight> {
         try {
             PreparedStatement stmt = dbConnect.prepareStatement(
                     "INSERT INTO Flight (airline_code, origin, destination, departure_time, arrival_time, total_seats, available_seats," +
-                            " price_cents, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    " price_cents, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, flight.getAirline());
             stmt.setString(2, flight.getOrigin());
             stmt.setString(3, flight.getDestination());

@@ -1,8 +1,9 @@
 package ca.ucalgary.ensf480.flightreservation.ui.Modules.Reservations;
 
 import java.util.function.Consumer;
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
+
 import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
 
 public final class ReservationsModule implements Module {
     private final Object[][] actionButtons = {
@@ -20,13 +21,8 @@ public final class ReservationsModule implements Module {
     public void cancelReservation(String[] args) { DatabaseCallbacks.cancelReservation(args); }
     public void removeReservation(String[] args) { DatabaseCallbacks.removeReservation(args); }
 
-
-
-
     //Data Base Callbacks go here
-    public String[] getTableColumns() { return new String[]{"Reservation ID", "Customer ID", "Flight ID", "Status"}; }
-    public Object[][] getTableData() {
-        return DatabaseCallbacks.listReservations();
-    }
-    
+    public String[] getTableColumns() { return new String[]{"Customer Email", "Flight ID", "Status"}; }
+    public Object[][] getTableData() { return DatabaseCallbacks.listReservations(); }
 }
+

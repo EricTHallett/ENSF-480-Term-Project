@@ -1,8 +1,10 @@
 package ca.ucalgary.ensf480.flightreservation;
 
-import ca.ucalgary.ensf480.flightreservation.ui.MainFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import ca.ucalgary.ensf480.flightreservation.ui.MainFrame;
 
 public final class App {
 
@@ -12,7 +14,13 @@ public final class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             useSystemDefaults();
-            new MainFrame().setVisible(true);
+            try {
+                new MainFrame().setVisible(true);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Startup Error", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
+            }
         });
     }
 

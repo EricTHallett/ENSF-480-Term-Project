@@ -1,8 +1,9 @@
-package ca.ucalgary.ensf480.flightreservation.ui;
+package ca.ucalgary.ensf480.flightreservation.ui.Styling;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,8 +59,8 @@ public final class UiStyle {
     }
 
     public static void primaryButton(JButton button) {
-        button.setBackground(HEADER);
-        button.setForeground(Color.WHITE);
+        button.setBackground(Color.WHITE);
+        button.setForeground(HEADER);
         button.setFocusPainted(false);
     }
 

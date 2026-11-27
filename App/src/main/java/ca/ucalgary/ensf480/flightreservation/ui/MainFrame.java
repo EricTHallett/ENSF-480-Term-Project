@@ -1,15 +1,32 @@
 package ca.ucalgary.ensf480.flightreservation.ui;
 
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights.FlightsModule;
-import ca.ucalgary.ensf480.flightreservation.ui.Navigation.*;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Dimension;
 import java.util.function.Consumer;
-import javax.swing.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights.FlightsModule;
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.AdminNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.FlightAgentNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.Navigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.SuperUserNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Navigation.UserNavigation;
+import ca.ucalgary.ensf480.flightreservation.ui.Styling.UiStyle;
 
 public final class MainFrame extends JFrame {
     private final Navigation navigation;
@@ -92,6 +109,7 @@ public final class MainFrame extends JFrame {
             for (JTextField field : fields) field.setText("");
         });
         fieldsPanel.add(clear);
+        
         bar.add(fieldsPanel, BorderLayout.CENTER);
         return bar;
     }

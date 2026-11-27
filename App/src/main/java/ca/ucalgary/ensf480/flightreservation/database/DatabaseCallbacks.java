@@ -1,8 +1,16 @@
 package ca.ucalgary.ensf480.flightreservation.database;
 
+import java.sql.Connection;
 import java.util.Arrays;
 
 public final class DatabaseCallbacks {
+
+    private static final Connection DB = DatabaseManager.getInstance().getConnection();
+    private static final FlightDAO FLIGHTS = new FlightDAO(DB);
+    private static final ReservationDAO RESERVATIONS = new ReservationDAO(DB);
+    private static final UserDAO USERS = new UserDAO(DB);
+    private static final AircraftDAO AIRCRAFT = new AircraftDAO(DB);
+
     private DatabaseCallbacks() {}
 
     // Flights
@@ -30,11 +38,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listFlights() {
         // Placeholder data until a SELECT query is implemented.
-        return new Object[][] {
-            {1, "Calgary", "Toronto", "ACTIVE"},
-            {2, "Calgary", "Vancouver", "ACTIVE"},
-            {3, "Edmonton", "Montreal", "CANCELLED"}
-        };
+        return FLIGHTS.findAll().stream()
+                .map(f -> new Object[]{f.getId(), f.getOrigin(), f.getDestination(), f.getStatus().name()})
+                .toArray(Object[][]::new);
     }
 
     // Reservations
@@ -57,11 +63,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listReservations() {
         // Placeholder data until a search query is implemented.
-        return new Object[][] {
-            {1, 1, 1, "CONFIRMED"},
-            {2, 2, 1, "CANCELLED"},
-            {3, 1, 2, "CONFIRMED"}
-        };
+        return RESERVATIONS.findAll().stream()
+                .map(r -> new Object[]{r.getPassenger().getEmail(), r.getFlight().getId(), r.getStatus().name()})
+                .toArray(Object[][]::new);
     }
 
     // Customers
@@ -92,12 +96,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listCustomers() {
         // Placeholder data until a search query is implemented.
-        return new Object[][] {
-            {1, "CUSTOMER", "ACTIVE"},
-            {2, "CUSTOMER", "ACTIVE"},
-            {3, "AGENT", "ACTIVE"},
-            {4, "ADMIN", "ACTIVE"}
-        };
+        return USERS.findAll().stream()
+                .map(u -> new Object[]{u.getEmail(), u.getRole().name(), u.isActive() ? "ACTIVE" : "INACTIVE"})
+                .toArray(Object[][]::new);
     }
 
     // Aircraft
@@ -128,10 +129,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listAircraft() {
         // Placeholder data until a SELECT query is implemented.
-        return new Object[][] {
-            {1, "ACTIVE"},
-            {2, "INACTIVE"}
-        };
+        return AIRCRAFT.findAll().stream()
+                .map(a -> new Object[]{a.getId(), a.isActive() ? "ACTIVE" : "INACTIVE"})
+                .toArray(Object[][]::new);
     }
 
     // Bottom navigation operations
