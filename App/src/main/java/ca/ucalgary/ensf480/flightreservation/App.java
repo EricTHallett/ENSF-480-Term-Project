@@ -3,6 +3,8 @@ package ca.ucalgary.ensf480.flightreservation;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import java.sql.SQLException;
+import java.io.IOException;
 
 import ca.ucalgary.ensf480.flightreservation.ui.MainFrame;
 
@@ -11,7 +13,7 @@ public final class App {
     private App() {
     }
 
-    public static void main(String[] args) throws SQLException, IOException{
+    public static void main(String[] args) throws SQLException, IOException {
         DatabaseInitializer.main(args);
         SwingUtilities.invokeLater(() -> {
             useSystemDefaults();

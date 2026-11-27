@@ -1,6 +1,10 @@
 package ca.ucalgary.ensf480.flightreservation.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import ca.ucalgary.ensf480.flightreservation.domain.UserRole;
