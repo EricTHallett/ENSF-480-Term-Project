@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import ca.ucalgary.ensf480.flightreservation.domain.Flight;
 import ca.ucalgary.ensf480.flightreservation.domain.PaymentStrategy;
@@ -36,7 +39,7 @@ public class ReservationDAO implements DAO<Reservation> {
             stmt.setInt(3, reservation.getNumSeats());
             stmt.setInt(4, reservation.getPriceCents());
             stmt.setString(5, reservation.getStatus().name());
-            stmt.setString(6, reservation.getPaymentStrategy().name());
+            stmt.setString(6, Objects.toString(reservation.getPaymentStrategy(), null));
 
             stmt.executeUpdate();
             stmt.close();
@@ -73,10 +76,12 @@ public class ReservationDAO implements DAO<Reservation> {
         User passenger = userDao.findByEmailAndRole(result.getString("passenger_email"), UserRole.CUSTOMER);
         Flight flight = flightDao.findById(result.getInt("flight_id"));
         int numSeats = result.getInt("num_seats");
+        int priceCents = result.getInt("price_cents");
         ReservationStatus status = ReservationStatus.valueOf(result.getString("status"));
-        PaymentStrategy paymentStrategy = PaymentStrategy.valueOf(result.getString("paymentStrategy"));
+        String strategy = result.getString("payment_strategy");
+        PaymentStrategy paymentStrategy = strategy == null ? null : PaymentStrategy.valueOf(strategy);
 
-        return new Reservation(passenger, flight, numSeats, status, paymentStrategy);
+        return new Reservation(passenger, flight, numSeats, priceCents, status, paymentStrategy);
     }
 
     public Reservation findByPassengerAndFlight(String passengerEmail, int flightId) {
@@ -84,7 +89,9 @@ public class ReservationDAO implements DAO<Reservation> {
 
         try {
             PreparedStatement stmt = dbConnect.prepareStatement(
-                "SELECT * FROM Reservation WHERE passenger_email=\"" + passengerEmail + "\" AND flight_id=\"" + flightId + "\"");
+                "SELECT * FROM Reservation WHERE passenger_email = ? AND flight_id = ?");
+            stmt.setString(1, passengerEmail);
+            stmt.setInt(2, flightId);
 
             ResultSet results = stmt.executeQuery();
 
@@ -101,5 +108,18 @@ public class ReservationDAO implements DAO<Reservation> {
 
         return ret;
 
+    }
+
+    public List<Reservation> findAll() {
+        List<Reservation> reservations = new ArrayList<>();
+        try (PreparedStatement stmt = dbConnect.prepareStatement(
+                "SELECT * FROM Reservation ORDER BY passenger_email, flight_id");
+             ResultSet results = stmt.executeQuery()) {
+            while (results.next()) reservations.add(createFromResultSet(results));
+        }
+        catch (SQLException e) {
+            throw new RuntimeException("Error listing reservations", e);
+        }
+        return reservations;
     }
 }

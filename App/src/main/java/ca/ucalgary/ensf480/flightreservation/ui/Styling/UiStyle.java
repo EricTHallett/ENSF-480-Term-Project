@@ -61,8 +61,8 @@ public static void searchPanel(JPanel panel) {
     }
 
     public static void primaryButton(JButton button) {
-        button.setBackground(HEADER);
-        button.setForeground(Color.WHITE);
+        button.setBackground(Color.WHITE);
+        button.setForeground(HEADER);
         button.setFocusPainted(false);
     }
 

@@ -1,8 +1,9 @@
 package ca.ucalgary.ensf480.flightreservation.ui.Modules.Reservations;
 
 import java.util.function.Consumer;
-import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
+
 import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
+import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
 
 public final class ReservationsModule implements Module {
     private final Object[][] actionButtons = {
@@ -30,3 +31,4 @@ public final class ReservationsModule implements Module {
     }
     
 }
+

@@ -1,13 +1,18 @@
 package ca.ucalgary.ensf480.flightreservation.database;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
+import ca.ucalgary.ensf480.flightreservation.domain.UserRole;
+
 public final class DatabaseCallbacks {
+
+    private static final Connection DB = DatabaseManager.getInstance().getConnection();
+    private static final FlightDAO FLIGHTS = new FlightDAO(DB);
+    private static final ReservationDAO RESERVATIONS = new ReservationDAO(DB);
+    private static final UserDAO USERS = new UserDAO(DB);
+    private static final AircraftDAO AIRCRAFT = new AircraftDAO(DB);
+
     private DatabaseCallbacks() {}
 
     // Flights
@@ -36,11 +41,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listFlights() {
         // Placeholder data until a SELECT query is implemented.
-        return new Object[][] {
-            {1, "Calgary", "Toronto", "ACTIVE"},
-            {2, "Calgary", "Vancouver", "ACTIVE"},
-            {3, "Edmonton", "Montreal", "CANCELLED"}
-        };
+        return FLIGHTS.findAll().stream()
+                .map(f -> new Object[]{f.getId(), f.getOrigin(), f.getDestination(), f.getStatus().name()})
+                .toArray(Object[][]::new);
     }
 
     // Reservations
@@ -64,11 +67,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listReservations() {
         // Placeholder data until a search query is implemented.
-        return new Object[][] {
-            {1, 1, 1, "CONFIRMED"},
-            {2, 2, 1, "CANCELLED"},
-            {3, 1, 2, "CONFIRMED"}
-        };
+        return RESERVATIONS.findAll().stream()
+                .map(r -> new Object[]{r.getPassenger().getEmail(), r.getFlight().getId(), r.getStatus().name()})
+                .toArray(Object[][]::new);
     }
 
     // Customers
@@ -134,32 +135,10 @@ public final class DatabaseCallbacks {
         System.out.println("DatabaseCallbacks.deleteCustomer: " + Arrays.toString(args));
     }
     public static Object[][] listCustomers() {
-        String sql = "SELECT * FROM User";
-        ArrayList<Object[]> rows = new ArrayList<>();
-
-        Connection connection = DatabaseManager.getInstance().getConnection();
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                rows.add(new Object[]{
-                    rs.getString("email"),
-                    rs.getString("role"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getBoolean("is_active"),
-                    rs.getString("promotion_sent_on")
-                });
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Failed to retrieve users", e);
-        }
-        for (Object i : rows.toArray()){
-            System.err.println(i);
-        }
-        return rows.toArray(new Object[0][]);
+        // Placeholder data until a search query is implemented.
+        return USERS.findAll().stream().filter(u -> u.getRole() == UserRole.CUSTOMER)
+                .map(u -> new Object[]{u.getEmail(), u.getRole().name(), u.isActive() ? "ACTIVE" : "INACTIVE"})
+                .toArray(Object[][]::new);
     }
 
     // Aircraft
@@ -191,10 +170,9 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listAircraft() {
         // Placeholder data until a SELECT query is implemented.
-        return new Object[][] {
-            {1, "ACTIVE"},
-            {2, "INACTIVE"}
-        };
+        return AIRCRAFT.findAll().stream()
+                .map(a -> new Object[]{a.getId(), a.isActive() ? "ACTIVE" : "INACTIVE"})
+                .toArray(Object[][]::new);
     }
 
     // Bottom navigation operations

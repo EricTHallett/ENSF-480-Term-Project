@@ -15,9 +15,23 @@ public class Reservation {
         this.passenger = passenger;
         this.flight = flight;
         this.numSeats = numSeats;
-        this.priceCents = (int)flight.calculateTotal(numSeats) * 100;
+        this.priceCents = priceFor(flight, numSeats);
         this.status = status;
         this.paymentStrategy = paymentStrategy;
+    }
+
+    public Reservation(User passenger, Flight flight, int numSeats, int priceCents,
+                       ReservationStatus status, PaymentStrategy paymentStrategy) {
+        this.passenger = passenger;
+        this.flight = flight;
+        this.numSeats = numSeats;
+        this.priceCents = priceCents;
+        this.status = status;
+        this.paymentStrategy = paymentStrategy;
+    }
+
+    private static int priceFor(Flight flight, int seats) {
+        return (int) Math.round(flight.calculateTotal(seats) * 100);
     }
 
     public User getPassenger() {
@@ -35,6 +49,7 @@ public class Reservation {
     public void addSeats(int count) {
         flight.reserveSeats(count);
         numSeats += count;
+        priceCents = priceFor(flight, numSeats);
     }
 
     public void removeSeats(int count) {
@@ -42,6 +57,7 @@ public class Reservation {
 
         flight.releaseSeats(count);
         numSeats -= count;
+        priceCents = priceFor(flight, numSeats);
     }
 
     public int getPriceCents() {

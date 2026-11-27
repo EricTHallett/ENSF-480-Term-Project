@@ -119,6 +119,7 @@ public final class MainFrame extends JFrame {
             for (JTextField field : fields) field.setText("");
         });
         fieldsPanel.add(clear);
+        
         bar.add(fieldsPanel, BorderLayout.CENTER);
         return bar;
     }

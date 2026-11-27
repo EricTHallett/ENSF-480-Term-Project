@@ -1,16 +1,17 @@
 package ca.ucalgary.ensf480.flightreservation.ui.Modules.Flights;
 
 import java.util.function.Consumer;
+
+import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
 import ca.ucalgary.ensf480.flightreservation.ui.Dialogs.FlightDialog;
 import ca.ucalgary.ensf480.flightreservation.ui.Modules.Module;
-import ca.ucalgary.ensf480.flightreservation.database.DatabaseCallbacks;
 
 public final class FlightsModule implements Module {
     private final Object[][] actionButtons = {
         {"Add Flight", (Consumer<String[]>) this::addFlight, false},
         {"Remove Flight", (Consumer<String[]>) this::removeFlight},
         {"Update Flight", (Consumer<String[]>) this::updateFlight},
-        {"Cancle Flight", (Consumer<String[]>) this::cancleFlight}
+        {"Cancel Flight", (Consumer<String[]>) this::cancelFlight}
     };
 
     public String[] getSearchFields() {
@@ -28,7 +29,9 @@ public final class FlightsModule implements Module {
     }
     public void removeFlight(String[] text) { DatabaseCallbacks.removeFlight(text); }
     public void updateFlight(String[] text) { DatabaseCallbacks.updateFlight(text); }
-    public void cancleFlight(String[] text) { DatabaseCallbacks.cancelFlight(text); }
+
+    public void cancelFlight(String[] text) { DatabaseCallbacks.cancelFlight(text); }
+
     public Object[][] searchDatabase(String[] value){
         return DatabaseCallbacks.searchFlight(value);
     }

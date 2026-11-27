@@ -31,7 +31,7 @@ CREATE TABLE Aircraft (
 
 CREATE TABLE Flight (
     id INTEGER PRIMARY KEY,
-    airline_code INTEGER,
+    airline_code TEXT,
     aircraft_id INTEGER REFERENCES Aircraft(id),
     departure_time TEXT NOT NULL,
     arrival_time TEXT NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE Flight (
 );
 
 CREATE TABLE Reservation (
-    passenger_email INTEGER NOT NULL,
+    passenger_email TEXT NOT NULL,
     flight_id INTEGER NOT NULL,
     num_seats INTEGER NOT NULL,
     price_cents INTEGER NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE Reservation (
 INSERT INTO User (email, role, first_name, last_name, is_active, promotion_sent_on) VALUES
     ("john.doe@email.com", "CUSTOMER", "John", "Doe", 1, "2026-10-30"),
     ("jane.doe@email.com", "FLIGHT_AGENT", "Jane", "Doe", 1, "2026-11-26"),
-    ("tim.ronald@email.com", "SYSTEM_ADMINISTRATOR", "Time", "Ronald", 1, "2026-11-26")
+    ("tim.ronald@email.com", "SYSTEM_ADMINISTRATOR", "Tim", "Ronald", 1, "2026-11-26")
 ;
 
 INSERT INTO Aircraft (id, aircraft_model, seats, is_active) VALUES 
@@ -67,7 +67,7 @@ INSERT INTO Aircraft (id, aircraft_model, seats, is_active) VALUES
 ;
 
 INSERT INTO Flight (id, airline_code, aircraft_id, departure_time, arrival_time, total_seats, available_seats, price_cents, origin, destination, status) VALUES
-    (1, "ACA", 1, "2026-12-01T12:00:00", "2026-12-01T13:30:00", 327, 327, 10000, "Calgary", "Vancouver", "SCHEDULED")
+    (1, "ACA", 1, "2027-03-01T12:00:00", "2027-03-01T13:30:00", 327, 326, 10000, "Calgary", "Vancouver", "SCHEDULED")
 ;
 
 INSERT INTO Reservation (passenger_email, flight_id, num_seats, price_cents, status, payment_strategy) VALUES

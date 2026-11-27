@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseManager {
     private static DatabaseManager instance;
@@ -14,7 +15,10 @@ public class DatabaseManager {
 
     private DatabaseManager() {
         try { 
-            connection = DriverManager.getConnection(URL); 
+            connection = DriverManager.getConnection(URL);
+            try (Statement stmt = connection.createStatement()) {
+                stmt.execute("PRAGMA foreign_keys = ON");
+            }
         }
         catch (SQLException e) {
             throw new RuntimeException("Error initializing database connection", e);
