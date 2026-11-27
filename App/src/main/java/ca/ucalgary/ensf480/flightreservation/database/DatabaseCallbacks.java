@@ -3,6 +3,8 @@ package ca.ucalgary.ensf480.flightreservation.database;
 import java.sql.Connection;
 import java.util.Arrays;
 
+import ca.ucalgary.ensf480.flightreservation.domain.UserRole;
+
 public final class DatabaseCallbacks {
 
     private static final Connection DB = DatabaseManager.getInstance().getConnection();
@@ -96,7 +98,7 @@ public final class DatabaseCallbacks {
 
     public static Object[][] listCustomers() {
         // Placeholder data until a search query is implemented.
-        return USERS.findAll().stream()
+        return USERS.findAll().stream().filter(u -> u.getRole() == UserRole.CUSTOMER)
                 .map(u -> new Object[]{u.getEmail(), u.getRole().name(), u.isActive() ? "ACTIVE" : "INACTIVE"})
                 .toArray(Object[][]::new);
     }
