@@ -71,5 +71,5 @@ INSERT INTO Flight (id, airline_code, aircraft_id, departure_time, arrival_time,
 ;
 
 INSERT INTO Reservation (passenger_email, flight_id, num_seats, price_cents, status, payment_strategy) VALUES
-    ("john.doe@email.com", 1, 1, 10000, "RESERVED", NULL)
+    ("john.doe@email.com", 1, 1, 10000, "RESERVED", "DEBIT")
 ;

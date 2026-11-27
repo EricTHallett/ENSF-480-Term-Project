@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ca.ucalgary.ensf480.flightreservation.domain.Flight;
+import ca.ucalgary.ensf480.flightreservation.domain.PaymentStrategy;
 import ca.ucalgary.ensf480.flightreservation.domain.Reservation;
 import ca.ucalgary.ensf480.flightreservation.domain.ReservationStatus;
 import ca.ucalgary.ensf480.flightreservation.domain.User;
@@ -28,13 +29,14 @@ public class ReservationDAO implements DAO<Reservation> {
 
         try {
             PreparedStatement stmt = dbConnect.prepareStatement(
-                "INSERT INTO Reservation (passenger_email, flight_id, num_seats, price_cents, status) VALUES (?, ?, ?, ?, ?)");
+                "INSERT INTO Reservation (passenger_email, flight_id, num_seats, price_cents, status, payment_strategy) VALUES (?, ?, ?, ?, ?, ?)");
 
             stmt.setString(1, reservation.getPassenger().getEmail());
             stmt.setInt(2, reservation.getFlight().getId());
             stmt.setInt(3, reservation.getNumSeats());
             stmt.setInt(4, reservation.getPriceCents());
             stmt.setString(5, reservation.getStatus().name());
+            stmt.setString(6, reservation.getPaymentStrategy().name());
 
             stmt.executeUpdate();
             stmt.close();
@@ -72,8 +74,9 @@ public class ReservationDAO implements DAO<Reservation> {
         Flight flight = flightDao.findById(result.getInt("flight_id"));
         int numSeats = result.getInt("num_seats");
         ReservationStatus status = ReservationStatus.valueOf(result.getString("status"));
+        PaymentStrategy paymentStrategy = PaymentStrategy.valueOf(result.getString("paymentStrategy"));
 
-        return new Reservation(passenger, flight, numSeats, status);
+        return new Reservation(passenger, flight, numSeats, status, paymentStrategy);
     }
 
     public Reservation findByPassengerAndFlight(String passengerEmail, int flightId) {
