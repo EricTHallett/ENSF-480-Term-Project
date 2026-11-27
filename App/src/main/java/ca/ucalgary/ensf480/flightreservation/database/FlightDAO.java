@@ -36,4 +36,54 @@ public class FlightDAO implements DAO<Flight> {
 
         return new Flight(flightId, airline, origin, destination, departure, arrival, price, totalSeats, availableSeats, status);
     }
+
+    @Override
+    public void add(Flight flight) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void update(Flight flight) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Flight findById(int id) {
+        Flight ret = null;
+
+        try {
+            PreparedStatement stmt = dbConnect.prepareStatement(SELECT_FLIGHT + " WHERE f.id = ?");
+            stmt.setInt(1, id);
+
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                ret = createFromResultSet(results);
+            }
+
+            results.close();
+            stmt.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException("Error finding flight " + id, e);
+        }
+        return ret;
+    }
+    public List<Flight> findAll() {
+        List<Flight> flights = new ArrayList<>();
+
+        try {
+            PreparedStatement stmt = dbConnect.prepareStatement(SELECT_FLIGHT + " ORDER BY f.departure_time");
+            ResultSet results = stmt.executeQuery();
+
+            while (results.next()) {
+                flights.add(createFromResultSet(results));
+            }
+
+            results.close();
+            stmt.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException("Error finding flights", e);
+        }
+        return flights;
+    }
 }
